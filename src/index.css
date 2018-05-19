@@ -1,5 +1,23 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+
+/* Login Page */
+
+.login-input{
+   width: 300px;
+   margin: 10px auto;
+}
+
+.login-button{
+   width: 300px;
+}
+
+.login-sso-button{
+   width: 100px;
+}
+
+.login-register{
+   width: 300px;
+   margin: 10px auto;
+   font-weight: bold;
+   font-size: 20px;
+   text-align: right;
 }
