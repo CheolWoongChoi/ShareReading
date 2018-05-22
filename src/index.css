@@ -21,3 +21,36 @@
    font-size: 20px;
    text-align: right;
 }
+
+/* .login-error{
+   width: 300px;
+} */
+
+
+/* Register Page */
+
+.register-title{
+   padding: 30px;
+}
+
+.register-label{
+   width: 100px;
+}
+
+.register-field{
+   width: 300px;
+   margin: 10px auto;
+}
+
+.register-submit{
+   width: 200px;
+   margin: 40px 0 10px 0;
+}
+
+.register-button{
+   width: 200px;
+}
+
+/* .register-error{
+   width: 300px;
+} */

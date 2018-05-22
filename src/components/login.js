@@ -5,44 +5,33 @@ import axios from 'axios';
 
 class Login extends Component {
 
-  componentDidMount(){
-      axios.get('/api')
-        .then( (res) => {
-            this.setState({data : res.data});
-            console.log(this.state.data);
-        });
-  }
+  renderField(field){
 
-  idField(field){
-
+    const { meta : {touched, error} } = field;
+    const hasError = `${touched && error ? 'has-error' : ''}`
+    
     return(
-      <div>
+      <div className={hasError}>
         <input 
-          className="form-control input-lg login-input" 
-          type="text" 
-          placeholder="ID"
+          className={`form-control input-lg login-input ${hasError}`} 
+          type={field.type} 
+          placeholder={field.label}
           {...field.input}
         />
-      </div>
-    )
-  }
 
-  passwordField(field){
-
-    return(
-      <div>
-        <input 
-          className="form-control input-lg login-input" 
-          type="password" 
-          placeholder="Password"
-          {...field.input}
-        />
+        <div className="login-error">
+          {touched ? error : ''}
+        </div>
       </div>
     )
   }
   
   onSubmit(values){
     console.log(values);
+    axios.post('/auth/login', values)
+      .then( (res) => {
+        console.log(res.data)
+      });
   }
 
   render(){
@@ -50,6 +39,7 @@ class Login extends Component {
     const { handleSubmit } = this.props;
 
     return(
+
       <div>
         <div className="text-center">
           <h1>Share Reading</h1>
@@ -62,12 +52,14 @@ class Login extends Component {
             <Field
               label="ID"
               name="id"
-              component={this.idField}
+              type="text"
+              component={this.renderField}
             />
             <Field
               label="PASSWORD"
               name="password"
-              component={this.passwordField}
+              type="password"
+              component={this.renderField}
             />
             <button className="btn btn-primary btn-lg login-button" type="submit">로그인</button>
           </form>
@@ -90,6 +82,30 @@ class Login extends Component {
   }
 }
 
+function validate(values){
+
+  const errors = {};
+
+  if(!values.id){
+    errors.id = "Enter ID!";
+  }
+
+  if(values.id && values.id.length < 8){
+    errors.id = "Please Input More than 8 digits";
+  }
+
+  if(!values.password){
+    errors.password = "Enter Password!";
+  }
+
+  if(values.password && values.password.length < 8){
+    errors.password = "Please Input More than 8 digits";
+  }
+
+  return errors;
+}
+
 export default reduxForm({
+  validate,
   form: 'login'
 })(Login);
