@@ -65,14 +65,17 @@ module.exports = function(passport){
    });
 
    route.post('/login', 
-      passport.authenticate('local', 
-            { 
-                  successRedirect: '/home',
-                  failureRedirect: '/auth/login',
-                  failureFlash: true
-            }
-      )
+      passport.authenticate('local', { failureRedirect: '/auth/login'}),
+      (req, res) => { res.redirect('/auth/success'); }
    );
+
+   route.get('/error', (req, res) => {
+      res.send('error');
+   });
+
+   route.get('/success', (req, res) => {
+         res.redirect('/home?userId=' + req.user.authId);
+   })
 
    return route;
 }

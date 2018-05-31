@@ -16,8 +16,7 @@ module.exports = function(app){
    passport.use(new LocalStrategy({
       usernameField: 'id',
       passwordField: 'password',
-      session: true,
-      passReqToCallback : true
+      session: true
    },
       function(username, password, done){
 
@@ -31,15 +30,13 @@ module.exports = function(app){
             //Error
             if(err){
                console.log('There is no User');
-               //res.send(false);
-               return done('false');
+               return done(err);
             }
             else{
                //No User
                if(results.length == 0){
                      console.log('There is no User');
-                     //res.send(false);
-                     return done(null, false, { message: 'false'});
+                     return done(null, false);
                }
                else{
                      let user = results[0];
@@ -49,14 +46,10 @@ module.exports = function(app){
                         if(hash === user.password){
                               console.log('Login Success');
                               return done(null, user);
-                              // req.session.save( () => {
-                              //    res.send(true);
-                              // });
                         }
                         //Invalid PW
                         else{
-                              //res.send(false);
-                              return done(null, false, { message : 'false'}); 
+                              return done(null, false); 
                         }
                      });
                   }
