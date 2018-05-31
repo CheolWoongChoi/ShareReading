@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import connect from 'react-redux';
+import { withAlert } from 'react-alert';
 import axios from 'axios';
 
 class Login extends Component {
@@ -27,10 +27,14 @@ class Login extends Component {
   }
   
   onSubmit(values){
-    console.log(values);
     axios.post('/auth/login', values)
       .then( (res) => {
-        console.log(res.data)
+        if(res.data){
+          this.props.history.push('/home');
+        } 
+        else{
+           this.props.alert.show('WRONG ID or WRONG PASSWORD');
+        }
       });
   }
 
@@ -108,4 +112,4 @@ function validate(values){
 export default reduxForm({
   validate,
   form: 'login'
-})(Login);
+})( withAlert(Login) );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router-dom';  
+import { Link } from 'react-router-dom';
+import { withAlert } from 'react-alert';  
 import axios from 'axios';
 
 class Register extends Component {
@@ -29,11 +30,21 @@ class Register extends Component {
   }
   
   onSubmit(values){
-      console.log(values);
       axios.post('/auth/register', values)
-         .then( (response) => {
-            console.log(response.data);
-            this.props.history.push('/');
+         .then( (res) => {
+
+            console.log(res.data);
+
+            if(res.data ==='DUPL-ID'){
+                this.props.alert.show('DUPLICATE ID!');
+            } 
+            else if(res.data === 'DUPL-NICK'){
+                this.props.alert.show('DUPLICATE NICKNAME!');
+            } 
+            else{
+                this.props.history.push('/');
+            }
+
          });
   }
 
@@ -128,4 +139,4 @@ function validate(values){
 export default reduxForm({
   validate,
   form: 'register'
-})(Register);
+})( withAlert(Register) );
