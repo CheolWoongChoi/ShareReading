@@ -30,8 +30,9 @@ class Login extends Component {
     axios.post('/auth/login', values)
       .then( (res) => {
         if(res.data){
+          console.log(res.data);
           this.props.history.push('/home');
-        } 
+        }
         else{
            this.props.alert.show('WRONG ID or WRONG PASSWORD');
         }

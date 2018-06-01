@@ -12,6 +12,35 @@ module.exports = function(app){
    app.use(passport.session());
    
 
+   //From passport info To Session
+   passport.serializeUser(function(user, done) {
+      console.log('[SerializeUser]');
+
+      let userInfo = {
+            authId: user.authId,
+            nickname: user.nickname
+      }
+
+      done(null, userInfo);
+   });
+   
+   passport.deserializeUser(function(user, done) {
+   
+      console.log('[DeserializeUser]');
+      
+      var sql = 'SELECT * FROM test1 WHERE authId= ?';
+      conn.query(sql, [user.authId], (err, results) => {
+      
+            if(err){
+            console.log(err);
+            done('There is no user.');
+            } else {
+            done(null, results[0]);
+            }
+   
+      });
+   });
+
    //Login LocalStrategy
    passport.use(new LocalStrategy({
       usernameField: 'id',
@@ -29,13 +58,13 @@ module.exports = function(app){
             
             //Error
             if(err){
-               console.log('There is no User');
+               console.log('[MySQL Error] There is no User');
                return done(err);
             }
             else{
                //No User
                if(results.length == 0){
-                     console.log('There is no User');
+                     console.log('[No User] There is no User');
                      return done(null, false);
                }
                else{
@@ -44,11 +73,12 @@ module.exports = function(app){
                         
                         //Same ID && PW
                         if(hash === user.password){
-                              console.log('Login Success');
+                              console.log('[Success] Login Success');
                               return done(null, user);
                         }
                         //Invalid PW
                         else{
+                              console.log('[Invalid PW] Login Fail');
                               return done(null, false); 
                         }
                      });
@@ -57,30 +87,6 @@ module.exports = function(app){
          });
       }
    ));
-
-
-   //From passport info To Session
-   passport.serializeUser(function(user, done) {
-      console.log('***SerializeUser***', user);
-      done(null, user.authId);
-   });
-   
-   passport.deserializeUser(function(id, done) {
-   
-      console.log('***DeserializeUser***', id);
-      
-      var sql = 'SELECT * FROM test1 WHERE authId= ?';
-      conn.query(sql, [id], (err, results) => {
-      
-            if(err){
-            console.log(err);
-            done('There is no user.');
-            } else {
-            done(null, results[0]);
-            }
-   
-      });
-   });
 
    return passport;
 }

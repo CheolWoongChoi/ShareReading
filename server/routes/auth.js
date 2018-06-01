@@ -47,13 +47,7 @@ module.exports = function(passport){
                                  res.send(false);
                               }
                               else{
-                                 // req.login(user, function(err){
-                                 //    req.session.save( () => {
-                                 //    res.redirect('/');
-                                 //    });
-                                 req.session.save( () => {
                                  res.redirect('/');
-                                 });
                               }
                         });
                      });//hasher
@@ -65,17 +59,23 @@ module.exports = function(passport){
    });
 
    route.post('/login', 
-      passport.authenticate('local', { failureRedirect: '/auth/login'}),
-      (req, res) => { res.redirect('/auth/success'); }
+      passport.authenticate('local', { failureRedirect: '/auth/login/error' }),
+      (req, res) => { res.redirect('/auth/login/success?authId='+req.user.authId); }
    );
-
-   route.get('/error', (req, res) => {
-      res.send('error');
+   
+   route.get('/login/success', (req, res) => {
+      res.send(true);
+   });
+   
+   route.get('/login/error', (req, res) => {
+      res.send(false);
    });
 
-   route.get('/success', (req, res) => {
-         res.redirect('/home?userId=' + req.user.authId);
-   })
+   route.get('/logout', (req, res) => {
+      req.logout();
+      req.session.save((err) => {});
+   });
+
 
    return route;
 }
