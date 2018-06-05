@@ -30,7 +30,7 @@ class Login extends Component {
     axios.post('/auth/login', values)
       .then( (res) => {
         if(res.data){
-          console.log(res.data);
+          //console.log(res.data);
           this.props.history.push('/home');
         }
         else{
@@ -49,7 +49,7 @@ class Login extends Component {
         <div className="text-center">
           <h1>Share Reading</h1>
           <br/>
-          {<img src={require("../images/login_welcome.jpg")} width="300px" alt="welcome"/>}
+          <img src={require("../images/login_welcome.jpg")} width="300px" alt="welcome"/>
         </div>
 
         <div className="form-group text-center">

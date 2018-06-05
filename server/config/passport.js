@@ -28,7 +28,7 @@ module.exports = function(app){
    
       console.log('[DeserializeUser]');
       
-      var sql = 'SELECT * FROM test1 WHERE authId= ?';
+      var sql = 'SELECT * FROM users WHERE authId= ?';
       conn.query(sql, [user.authId], (err, results) => {
       
             if(err){
@@ -52,7 +52,7 @@ module.exports = function(app){
          let loginId = username;
          let loginPw = password;
       
-         let sql = 'SELECT * FROM test1 WHERE authId = ?';
+         let sql = 'SELECT * FROM users WHERE authId = ?';
 
          conn.query(sql, ['Local:' + loginId], (err, results, fields) => {
             

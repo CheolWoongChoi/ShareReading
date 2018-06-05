@@ -11,7 +11,7 @@ module.exports = function(passport){
    //Routers
    route.post('/register', (req, res) => {
       
-      let sql = `SELECT authId FROM test1 WHERE authId = '${'Local:'+req.body.id}'`;
+      let sql = `SELECT authId FROM users WHERE authId = '${'Local:'+req.body.id}'`;
       conn.query(sql, (err, result) => {
          
          //Duplicate ID
@@ -21,7 +21,7 @@ module.exports = function(passport){
             res.send('DUPL-ID');
          } 
          else{
-            sql = `SELECT nickname FROM test1 WHERE nickname = '${req.body.nickname}'`;
+            sql = `SELECT nickname FROM users WHERE nickname = '${req.body.nickname}'`;
             conn.query(sql, (err, result) => {
             
                   //Duplicate Nickname
@@ -40,7 +40,7 @@ module.exports = function(passport){
                               salt: salt,
                         }
                      
-                        let sql = 'INSERT INTO test1 SET ?';
+                        let sql = 'INSERT INTO users SET ?';
                         conn.query(sql, user, (err) => {
                   
                               if(err){

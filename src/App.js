@@ -9,6 +9,7 @@ import reducers from './reducers';
 import Login from './components/login';
 import Register from './components/register';
 import Home from './components/home';
+import MyPage from './components/mypage';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -21,6 +22,7 @@ class App extends Component {
             <Switch>
               <Route path='/register' component={Register} />
               <Route path='/home' component={Home} />
+              <Route path='/mypage' component={MyPage} />
               <Route path='/' component={Login} />
             </Switch>
           </div>

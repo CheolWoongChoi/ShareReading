@@ -54,3 +54,34 @@
 /* .register-error{
    width: 300px;
 } */
+
+
+/* Home Page */
+
+.home-member{
+   padding: 15px;
+   font-size: 15px;
+}
+
+.home-member-btn{
+   margin: 5px;
+}
+
+/* Mypage Page */
+
+.mypage-top{
+   padding: 15px;
+   font-size: 15px;
+}
+
+.mypage-top-right{
+   float: right;
+}
+
+.mypage-btn{
+   margin: 5px;
+}
+
+.mypage-book{
+   width: 100%;
+}
