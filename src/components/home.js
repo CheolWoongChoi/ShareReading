@@ -36,17 +36,16 @@ class Home extends Component {
       return (
             <div>
                   {
-                     nicknames.map( (nick) => {
+                        nicknames.map( (nick) => {
                         return (
                               <div key={nick.nickname}>
                                     <h2>({nick.nickname}님)</h2>
                                     <h4>[{nick.nickname}님의 책's]</h4>
                               </div>
                         )
-                     })
+                        })
                   } 
             </div>
-       
       );
    }
 

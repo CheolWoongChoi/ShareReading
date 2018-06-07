@@ -9,6 +9,9 @@ app.use('/auth', auth);
 const home = require('./routes/home');
 app.use('/home', home);
 
+const mypage = require('./routes/mypage');
+app.use('/mypage', mypage);
+
 app.get('/sessionInfo', (req, res) => {
    res.send(req.session.passport.user);
 });
