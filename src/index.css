@@ -94,10 +94,24 @@
    width: 100%;
 }
 
-.mypage-text{
+.mypage-book-text{
    margin-top: 30px;
 }
 
-.mypage-book-content{
+.mypage-add-text{
+   margin-top: 20px;
+   max-width: 300px;
+}
 
+.mypage-add-footer{
+   margin-top: 30px;
+}
+
+.mypage-modify-text{
+   margin-top: 20px;
+   max-width: 300px;
+}
+
+.mypage-modify-footer{
+   margin-top: 30px;
 }

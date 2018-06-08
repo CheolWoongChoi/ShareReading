@@ -1,158 +1,180 @@
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchBooks } from '../actions';
 import axios from 'axios';
 
 import Modal from './modal';
 
-//import { connect } from 'react-redux';
 
 class MyPage extends Component {
 
    constructor(props){
+
       super(props);
       this.state = { 
         isAdd: false,
         isModify: false 
       };
+
+      this.bookAddModal = this.bookAddModal.bind(this);
+      this.bookModifyModal = this.bookModifyModal.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+   }
+
+   componentDidMount(){
+      this.props.fetchBooks();
    }
 
    clickLogOut(){
       axios.get('/auth/logout');
    }
 
-   bookAddModal = () => {
+   handleSubmit(event){
+      console.log(event.target);
+      event.preventDefault();
+
+      let addForm = document.getElementById('addForm');
+      let formData = new FormData(addForm);
+
+      axios.post('/mypage/add', formData)
+         .then( (res) => console.log(res.data) );
+   }
+
+   bookAddModal(){
       this.setState({
         isAdd: !this.state.isAdd
       });
    }
  
-   bookModifyModal = () => {
+   bookModifyModal(){
       this.setState({
         isModify: !this.state.isModify
       });
    }
 
-   renderBookAdd(){
+   renderBook(book){
       return(
-          <form action="/mypage/add" method="post" encType="multipart/form-data">
-              <input type="file" 
-                     className="form-control" 
-                     accept=".jpg, .jpeg, .png"
-                     name="bookImage"
-              />
-              <div className="mypage-text">
+        <div key={book.bookImage} className="mypage-book">
+            <div className="mypage-book-top text-right">
+              <button className="mypage-btn btn btn-primary" onClick={this.bookModifyModal}>정보 수정</button>
+              <button className="mypage-btn btn btn-danger">삭제</button>
+            </div>
+            <div className="mypage-book-content">
+              <div>
+                  <img src={require(`../../server/uploads/${book.nickname}/${book.bookImage}`)} 
+                    width="300px"
+                    height="300px" 
+                    alt="welcome" 
+                  />
+              </div>
+              <div className="mypage-book-text">
                   <label className="">책명</label>
                   <div className="">
-                    <input className="form-control" type="text" />
+                    <p>{book.bookName}</p>
                   </div>
               </div>
-              <div className="mypage-text">
+              <div className="mypage-book-text">
                   <label className="">저자</label>
                   <div className="">
-                    <input className="form-control" type="text" />
+                    <p>{book.author}</p>
                   </div>
               </div>
-              <div className="mypage-text">
+              <div className="mypage-book-text">
                   <label className="">발행일</label>
                   <div className="">
-                    <input className="form-control" type="text" />
+                    <p>{book.pubDate}</p>
                   </div>
               </div>
-              <div className="mypage-text">
+              <div className="mypage-book-text">
+                  <label className="">나의 메모</label>
+                  <div className="">
+                    <p>{book.memo}</p>
+                  </div>
+              </div>
+            </div>
+        </div>
+      )
+   }
+
+   renderBookAdd(){
+      return(
+          <form id="addForm" onSubmit={this.handleSubmit} encType="multipart/form-data">
+              <input type="file"
+                     name="bookImage" 
+                     className="form-control mypage-add-text" 
+                     accept=".jpg, .jpeg, .png"
+              />
+              <div className="mypage-add-text">
+                  <label className="">책명</label>
+                  <div className="">
+                    <input name="bookName" className="form-control" type="text" />
+                  </div>
+              </div>
+              <div className="mypage-add-text">
+                  <label className="">저자</label>
+                  <div className="">
+                    <input name="author" className="form-control" type="text" />
+                  </div>
+              </div>
+              <div className="mypage-add-text">
+                  <label className="">발행일</label>
+                  <div className="">
+                    <input name="pubDate" className="form-control" type="text" />
+                  </div>
+              </div>
+              <div className="mypage-add-text">
                   <label className="">MEMO</label>
                   <div className="">
-                    <textarea className="form-control" type="text" />
+                    <textarea name="memo" className="form-control" type="text" />
                   </div>
               </div>
-              <div className="text-center">
-                <input className="btn btn-primary" type="submit" value="적용"/>
+              <div className="mypage-add-footer text-center">
+                <input className="btn btn-primary" type="submit" value="추가하기"/>
               </div>
           </form>
       );
    }
 
    renderBookModify(){
-    return(
-        <form enctype="multipart/form-data">
-            <input type="file" 
-                   className="form-control" 
-                   accept=".jpg, .jpeg, .png"
-                   name="bookImage"
-            />
-            <div className="mypage-text">
-                <label className="">책명</label>
-                <div className="">
-                  <input className="form-control" type="text" />
-                </div>
-            </div>
-            <div className="mypage-text">
-                <label className="">저자</label>
-                <div className="">
-                  <input className="form-control" type="text" />
-                </div>
-            </div>
-            <div className="mypage-text">
-                <label className="">발행일</label>
-                <div className="">
-                  <input className="form-control" type="text" />
-                </div>
-            </div>
-            <div className="mypage-text">
-                <label className="">MEMO</label>
-                <div className="">
-                  <textarea className="form-control" type="text" />
-                </div>
-            </div>
-            <div className="text-center">
-              <input className="btn btn-primary" type="submit" value="적용"/>
-            </div>
-        </form>
-      );
-  }
-
-   renderBook(){
       return(
-         <div className="mypage-book">
-            <div className="mypage-book-top text-right">
-               <button className="mypage-btn btn btn-primary" onClick={this.bookModifyModal}>수정</button>
-               <button className="mypage-btn btn btn-danger">삭제</button>
-             </div>
-            <div className="mypage-book-content">
-               <div>
-                  <img src={require("../images/login_welcome.jpg")} 
-                     width="300px"
-                     height="300px" 
-                     alt="welcome" 
-                  />
-               </div>
-               <div className="mypage-text">
+          <form enctype="multipart/form-data">
+              <input type="file"
+                    name="bookImage" 
+                    className="form-control mypage-modify-text" 
+                    accept=".jpg, .jpeg, .png"     
+              />
+              <div className="mypage-modify-text">
                   <label className="">책명</label>
                   <div className="">
-                    <p>BOOK 1</p>
+                    <input name="bookName" className="form-control" type="text" />
                   </div>
-               </div>
-               <div className="mypage-text">
+              </div>
+              <div className="mypage-modify-text">
                   <label className="">저자</label>
                   <div className="">
-                    <p>ABC</p>
+                    <input name="author" className="form-control" type="text" />
                   </div>
-               </div>
-               <div className="mypage-text">
+              </div>
+              <div className="mypage-modify-text">
                   <label className="">발행일</label>
                   <div className="">
-                    <p>2018-06-06</p>
+                    <input name="pubDate" className="form-control" type="text" />
                   </div>
-               </div>
-               <div className="mypage-text">
+              </div>
+              <div className="mypage-modify-text">
                   <label className="">MEMO</label>
                   <div className="">
-                    <p>BOOK1 IS ...</p>
+                    <textarea name="memo" className="form-control" type="text" />
                   </div>
-               </div>
-            </div>
-         </div>
-      )
-   }
+              </div>
+              <div className="mypage-modify-footer text-center">
+                <input className="btn btn-primary" type="submit" value="수정하기"/>
+              </div>
+          </form>
+      );
+  }
 
    render(){
       return(
@@ -160,7 +182,7 @@ class MyPage extends Component {
             {/* 맨 윗줄 - 회원관리정보 */}
             <div>
                <span>
-                  <button className="mypage-btn btn btn-primary" onClick={this.bookAddModal} >추가</button>
+                  <button className="mypage-btn btn btn-primary" onClick={this.bookAddModal} >책 추가</button>
                </span>
                <span className="mypage-top-right">
                   <Link to="/home" className="mypage-btn btn btn-primary">홈 화면</Link>
@@ -169,15 +191,14 @@ class MyPage extends Component {
             </div>
 
             {/* 회원의 책 정보들 */}
-            <div> 
-                {this.renderBook()}     
+            <div>
+                { this.props.books.map( (book) => { return this.renderBook(book) }) }   
             </div>
 
             {/* 책 추가 */}
             <div>
                 <Modal show={this.state.isAdd}
                     onClose={this.bookAddModal}>
-                    책 추가 모달
                     {this.renderBookAdd()}
                 </Modal>
             </div>
@@ -186,7 +207,6 @@ class MyPage extends Component {
              <div>
                 <Modal show={this.state.isModify}
                     onClose={this.bookModifyModal}>
-                    책 수정 모달
                     {this.renderBookModify()}
                 </Modal>
               </div>
@@ -195,10 +215,8 @@ class MyPage extends Component {
    }
 }
 
-export default MyPage;
+function mapStateToProps(state) {
+    return { books: state.books }
+}
 
-// function mapStateToProps(state) {
-//       return { nicknames: state.nicknames }
-// }
-
-// export default connect(mapStateToProps, { getNickname })(Home);
+export default connect(mapStateToProps, { fetchBooks })(MyPage);

@@ -37,7 +37,7 @@ class Modal extends Component {
          <div className="modalContent" style={modalStyle}>
             <div className="text-right">
               <button className="btn btn-danger" onClick={this.props.onClose}>
-                닫기
+                창 닫기
               </button>
             </div>
             {this.props.children}
