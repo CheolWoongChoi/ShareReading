@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { withAlert } from 'react-alert';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Login extends Component {
@@ -70,15 +71,15 @@ class Login extends Component {
           </form>
         </div>
         
-        <div className="text-center">
+        {/* <div className="text-center">
           <button className="btn btn-success btn-lg login-sso-button">Naver</button>
           <button className="btn btn-warning btn-lg login-sso-button">Kakao</button>
           <button className="btn btn-danger btn-lg login-sso-button">Google</button>
-        </div>
+        </div> */}
 
         <div className="text-center">
           <div className="login-register">
-            <a href="/register">Register</a>
+            <Link to="/register" className="btn btn-danger btn-lg login-button">회원가입</Link>
           </div>
         </div>
 

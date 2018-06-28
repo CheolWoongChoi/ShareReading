@@ -49,6 +49,7 @@
 
 .register-button{
    width: 200px;
+   font-size: 15px;
 }
 
 /* .register-error{
@@ -105,6 +106,10 @@
 
 .mypage-add-footer{
    margin-top: 30px;
+}
+
+.mypage-modify-no{
+   display: none;
 }
 
 .mypage-modify-text{

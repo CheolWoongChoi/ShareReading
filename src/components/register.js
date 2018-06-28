@@ -95,7 +95,7 @@ class Register extends Component {
                </button>
             </div>
             <div>
-               <Link to="/" className="btn btn-danger btn-lg register-button">홈으로 돌아가기</Link>
+               <Link to="/" className="btn btn-danger btn-lg register-button">로그인화면으로 돌아가기</Link>
             </div>
           </form>
         </div>
