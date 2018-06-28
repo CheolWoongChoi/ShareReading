@@ -36,10 +36,10 @@ class Register extends Component {
             console.log(res.data);
 
             if(res.data ==='DUPL-ID'){
-                this.props.alert.show('DUPLICATE ID!');
+                this.props.alert.show('중복된 ID입니다!');
             } 
             else if(res.data === 'DUPL-NICK'){
-                this.props.alert.show('DUPLICATE NICKNAME!');
+                this.props.alert.show('중복된 닉네임입니다!');
             } 
             else{
                 this.props.history.push('/');
@@ -56,31 +56,31 @@ class Register extends Component {
       <div>
 
         <div className="register-title text-center">
-          <h1>Register</h1>
+          <p>회원가입</p>
         </div>
 
         <div className="text-center">
           <form className="form-inline" onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
             <Field
-              label="Id"
+              label="아이디"
               name="id"
               type="text"
               component={this.renderField}
             />
             <Field
-              label="NickName"
+              label="닉네임"
               name="nickname"
               type="text"
               component={this.renderField}
             />
             <Field
-              label="Password"
+              label="비밀번호"
               name="password"
               type="password"
               component={this.renderField}
             />
             <Field
-              label="RePassword"
+              label="비밀번호 확인"
               name="repassword"
               type="password"
               component={this.renderField}
@@ -91,7 +91,7 @@ class Register extends Component {
                   className="btn btn-primary btn-lg register-submit" 
                   type="submit"
                >
-               회원가입
+               등록하기
                </button>
             </div>
             <div>
@@ -110,27 +110,27 @@ function validate(values){
    const errors = {};
  
    if(!values.id){
-     errors.id = "Enter ID!";
+     errors.id = "아이디를 입력해주세요!";
    }
 
    if(values.id && values.id.length < 8){
-      errors.id = "Please Input More than 8 digits";
+      errors.id = "8자리 이상이어야 합니다!";
    }
 
    if(!values.nickname){
-     errors.nickname = "Enter Nickname!";
+     errors.nickname = "닉네임을 입력해주세요!";
    }
 
    if(!values.password){
-     errors.password = "Enter Password";
+     errors.password = "비밀번호를 입력해주세요!";
    } 
 
    if(values.password && values.password.length < 8){
-      errors.password = "Please Input More than 8 digits";
+      errors.password = "비밀번호는 8자리 이상이어야 합니다!";
    }
 
    if(values.password !== values.repassword){
-      errors.repassword = "Please confirm passwords";
+      errors.repassword = "입력하신 비밀번호와 일치되어야 합니다!";
    }
    
    return errors;

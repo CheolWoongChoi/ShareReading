@@ -35,7 +35,7 @@ class Login extends Component {
           this.props.history.push('/home');
         }
         else{
-           this.props.alert.show('WRONG ID or WRONG PASSWORD');
+           this.props.alert.show('(아이디) 또는 (비밀번호)를 잘못입력하셨습니다!');
         }
       });
   }
@@ -48,9 +48,9 @@ class Login extends Component {
 
       <div>
         <div className="text-center">
-          <p className="login-title">Share Reading</p>
-          <br/>
-          <img src={require("../images/login_welcome.jpg")} width="300px" alt="welcome"/>
+          <p className="login-title">SHARE READING</p>
+          <p className="login-subtitle">추천하고 싶은 책을 공유하는 프로젝트</p>
+          <img src={ require("../images/login_welcome.jpg") } width="300px" alt="welcome"/>
         </div>
 
         <div className="form-group text-center">
@@ -67,7 +67,7 @@ class Login extends Component {
               type="password"
               component={this.renderField}
             />
-            <button className="btn btn-primary btn-lg login-button" type="submit">로그인</button>
+            <button className="btn btn-primary btn-lg login-button" type="submit">로그인하기</button>
           </form>
         </div>
         
@@ -79,7 +79,7 @@ class Login extends Component {
 
         <div className="text-center">
           <div className="login-register">
-            <Link to="/register" className="btn btn-danger btn-lg login-button">회원가입</Link>
+            <Link to="/register" className="btn btn-danger btn-lg login-button">회원가입하기</Link>
           </div>
         </div>
 
@@ -93,19 +93,19 @@ function validate(values){
   const errors = {};
 
   if(!values.id){
-    errors.id = "Enter ID!";
+    errors.id = "아이디를 입력해주세요!";
   }
 
   if(values.id && values.id.length < 8){
-    errors.id = "Please Input More than 8 digits";
+    errors.id = "8자리 이상 입력해주세요!";
   }
 
   if(!values.password){
-    errors.password = "Enter Password!";
+    errors.password = "비밀번호를 입력해주세요!";
   }
 
   if(values.password && values.password.length < 8){
-    errors.password = "Please Input More than 8 digits";
+    errors.password = "8자리 이상 입력해주세요!";
   }
 
   return errors;

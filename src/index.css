@@ -3,7 +3,16 @@
 
 .login-title{
    margin: 2rem auto;
-   font-size: 5rem;
+   font-size: 4.5rem;
+   font-weight: bold;
+   color: skyblue;
+   border-color: #2e6da4;
+}
+
+.login-subtitle{
+   font-weight: bold;
+   color: tomato;
+   border-color: #d43f3a;
 }
 
 .login-input{
@@ -27,15 +36,20 @@
    text-align: right;
 }
 
-/* .login-error{
-   width: 300px;
-} */
+.login-error{
+   font-size: 1.5rem;
+   font-weight: bold;
+   color: tomato;
+}
 
 
 /* Register Page */
 
 .register-title{
    padding: 3rem;
+   font-size: 4rem;
+   font-weight: bold;
+   color: skyblue;
 }
 
 .register-label{
@@ -58,9 +72,11 @@
    font-size: 1.5rem;
 }
 
-/* .register-error{
-   width: 300px;
-} */
+.register-error{
+   font-size: 1.5rem;
+   font-weight: bold;
+   color: tomato;
+}
 
 
 /* Home Page */
@@ -82,6 +98,10 @@
 
 .home-book-image{
    margin: 0 auto;
+}
+
+.home-book-image:hover{
+   background-color: powderblue;
 }
 
 /* Mypage Page */
