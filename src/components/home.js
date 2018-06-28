@@ -1,18 +1,51 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { getNickname } from '../actions';
-// import { getImages } from '../actions';
 import { fetchAllBooks } from '../actions';
 import axios from 'axios';
+import Slider from 'react-slick';
+import Modal from './modal';
+
+/* React-Slick 이전, 다음 버튼 */
+function NextArrow(props) {
+      const { className, style, onClick } = props;
+      return (
+        <div
+          className={className}
+          style={{ ...style, display: "block", background: "blue" }}
+          onClick={onClick}
+        >
+        </div>
+      );
+    }
+    
+function PrevArrow(props) {
+      const { className, style, onClick } = props;
+      return (
+        <div
+          className={className}
+          style={{ ...style, display: "block", background: "blue" }}
+          onClick={onClick}
+        >
+        </div>
+      );
+    }
 
 class Home extends Component {
 
    constructor(props){
       super(props);
       this.state = {
-         nickname: ''
+         nickname: '',
+         isClickImage: false,
+
+         bookName: '',
+         author: '',
+         pubDate: '',
+         memo: ''
       };
+
+      this.clickImage = this.clickImage.bind(this);
    }
 
    componentDidMount(){
@@ -30,17 +63,30 @@ class Home extends Component {
       axios.get('/auth/logout');
    }
 
+   clickImage(bookInfo){
+      this.setState({
+            isClickImage: !this.state.isClickImage,
+            no: bookInfo.no,
+            bookName: bookInfo.bookName,
+            author: bookInfo.author,
+            pubDate: bookInfo.pubDate,
+            memo: bookInfo.memo
+      });
+   }
+
    renderImage(userBookInfo, nickname){
          
       if(userBookInfo){
             return userBookInfo.map( (Info) => {
-                  return ( 
-                  <img src={require(`../../server/uploads/${nickname}/${Info.bookImage}`)} 
-                        key={Info.bookImage}
-                        alt={Info.bookImage}
-                        width="200"
-                        height="200"
-                  />
+                  return (
+                  <div key={Info.bookImage} className="home-book-image"> 
+                     <img src={require(`../../server/uploads/${nickname}/${Info.bookImage}`)} 
+                          alt={Info.bookImage}
+                          width="200"
+                          height="250"
+                          onClick={() => {this.clickImage(Info)}}
+                     />
+                  </div>
                   )
             })
       }
@@ -49,12 +95,24 @@ class Home extends Component {
    renderUserBook(){
       const {allbooks} = this.props;
       
+      const settings = {
+            dots: false,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            nextArrow: <NextArrow />,
+            prevArrow: <PrevArrow />
+      };
+
       return Object.getOwnPropertyNames(allbooks)
             .map( (nickname) => { 
                   return(
                         <div key={nickname}>
                               <h1>{nickname}님의 책 CHOICE</h1>                             
-                              {this.renderImage(allbooks[nickname], nickname)}
+                              <Slider {...settings}>
+                                    {this.renderImage(allbooks[nickname], nickname)}
+                              </Slider>
                         </div>
                   );
             });
@@ -71,8 +129,33 @@ class Home extends Component {
             </div>
 
             {/* 회원들의 책 이미지정보 */}
-            <div>
+            <div className="home-book-list">
                   {this.renderUserBook()}
+            </div>
+            <div>
+                  <Modal show={this.state.isClickImage}
+                              onClose={ () => { 
+                                    this.setState({isClickImage: !this.state.isClickImage}) 
+                              }}
+                  >
+                  {/* Modal 내용 - 회원이 작성한 책정보*/}
+                  <div className="home-book-text">
+                        <label className="">책명</label>
+                        <p>{this.state.bookName}</p>
+                  </div>
+                  <div className="home-book-text">
+                        <label className="">저자</label>
+                        <p>{this.state.author}</p>
+                  </div>
+                  <div className="home-book-text">
+                        <label className="">발행일</label>
+                        <p>{this.state.pubDate}</p>
+                  </div>
+                  <div className="home-book-text">
+                        <label className="">나의 메모</label>
+                        <p>{this.state.memo}</p>
+                  </div>
+                  </Modal>
             </div>
          </div>
       );
@@ -81,8 +164,6 @@ class Home extends Component {
 
 function mapStateToProps(state) {
       return { 
-            nicknames: state.nicknames,
-            images: state.images,
             allbooks: state.allbooks 
       }
 }

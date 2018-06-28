@@ -1,24 +1,29 @@
 
 /* Login Page */
 
+.login-title{
+   margin: 2rem auto;
+   font-size: 5rem;
+}
+
 .login-input{
-   width: 300px;
-   margin: 10px auto;
+   width: 30rem;
+   margin: 1rem auto;
 }
 
 .login-button{
-   width: 300px;
+   width: 30rem;
 }
 
 .login-sso-button{
-   width: 100px;
+   width: 10rem;
 }
 
 .login-register{
-   width: 300px;
-   margin: 10px auto;
+   width: 30rem;
+   margin: 1rem auto;
    font-weight: bold;
-   font-size: 20px;
+   font-size: 1rem;
    text-align: right;
 }
 
@@ -30,26 +35,27 @@
 /* Register Page */
 
 .register-title{
-   padding: 30px;
+   padding: 3rem;
 }
 
 .register-label{
-   width: 100px;
+   width: 10rem;
+   padding-right: 2rem;
 }
 
 .register-field{
-   width: 300px;
-   margin: 10px auto;
+   width: 25rem;
+   margin: 1rem auto;
 }
 
 .register-submit{
-   width: 200px;
+   width: 25rem;
    margin: 40px 0 10px 0;
 }
 
 .register-button{
-   width: 200px;
-   font-size: 15px;
+   width: 25rem;
+   font-size: 1.5rem;
 }
 
 /* .register-error{
@@ -65,7 +71,17 @@
 }
 
 .home-member-btn{
-   margin: 5px;
+   margin: 1rem;
+}
+
+.home-book-list{
+   padding: 5rem 10rem;
+   margin: auto 0;
+   width: 125rem;
+}
+
+.home-book-image{
+   margin: 0 auto;
 }
 
 /* Mypage Page */
@@ -80,7 +96,7 @@
 }
 
 .mypage-btn{
-   margin: 5px;
+   margin: 1rem;
 }
 
 .mypage-book{

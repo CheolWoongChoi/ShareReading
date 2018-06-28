@@ -48,7 +48,7 @@ class Login extends Component {
 
       <div>
         <div className="text-center">
-          <h1>Share Reading</h1>
+          <p className="login-title">Share Reading</p>
           <br/>
           <img src={require("../images/login_welcome.jpg")} width="300px" alt="welcome"/>
         </div>

@@ -111,7 +111,7 @@ class MyPage extends Component {
             <div className="mypage-book-content">
                 <div>
                     <img src={require(`../../server/uploads/${book.nickname}/${book.bookImage}`)} 
-                        width="300px"
+                        width="250px"
                         height="300px" 
                         alt="welcome" 
                     />
