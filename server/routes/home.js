@@ -19,4 +19,35 @@ route.get('/users', (req, res) => {
 
 });
 
+route.get('/allbooks', (req, res) => {
+   let sql = `SELECT * FROM books`;
+   
+   conn.query(sql, (err, result) => {
+      if(err){
+         console.log(err);
+      }
+      else{
+         //console.log(result);
+         res.send(result);
+      }
+   });
+
+});
+
+route.get('/images', (req, res) => {
+   let sql = `SELECT no, bookImage FROM books WHERE nickname=?`;
+   
+   conn.query(sql, [req.query.nickname], (err, result) => {
+      if(err){
+         console.log(err);
+      }
+      else{
+         //console.log('***books***');
+         //console.log(result);
+         res.send(result);
+      }
+   });
+
+});
+
 module.exports = route

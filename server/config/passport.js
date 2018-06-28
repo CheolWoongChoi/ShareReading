@@ -14,7 +14,7 @@ module.exports = function(app){
 
    //From passport info To Session
    passport.serializeUser(function(user, done) {
-      console.log('[SerializeUser]');
+      //console.log('[SerializeUser]');
 
       let userInfo = {
             authId: user.authId,
@@ -26,7 +26,7 @@ module.exports = function(app){
    
    passport.deserializeUser(function(user, done) {
    
-      console.log('[DeserializeUser]');
+      //console.log('[DeserializeUser]');
       
       var sql = 'SELECT * FROM users WHERE authId= ?';
       conn.query(sql, [user.authId], (err, results) => {
