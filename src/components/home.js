@@ -12,7 +12,7 @@ function NextArrow(props) {
       return (
         <div
           className={className}
-          style={{ ...style, display: "block", background: "blue" }}
+          style={{ ...style, display: "block"}}
           onClick={onClick}
         >
         </div>
@@ -24,7 +24,7 @@ function PrevArrow(props) {
       return (
         <div
           className={className}
-          style={{ ...style, display: "block", background: "blue" }}
+          style={{ ...style, display: "block"}}
           onClick={onClick}
         >
         </div>
@@ -55,6 +55,7 @@ class Home extends Component {
                this.setState({nickname: res.data.nickname});
             });
       }
+
       if(!this.props.allbooks.length)
         this.props.fetchAllBooks();
    }
@@ -79,11 +80,10 @@ class Home extends Component {
       if(userBookInfo){
             return userBookInfo.map( (Info) => {
                   return (
-                  <div key={Info.bookImage} className="home-book-image"> 
+                  <div key={Info.bookImage} className="home-book-image-frame"> 
                      <img src={require(`../../server/uploads/${nickname}/${Info.bookImage}`)} 
+                          className="home-book-image"
                           alt={Info.bookImage}
-                          width="200"
-                          height="250"
                           onClick={() => {this.clickImage(Info)}}
                      />
                   </div>
@@ -109,7 +109,10 @@ class Home extends Component {
             .map( (nickname) => { 
                   return(
                         <div key={nickname}>
-                              <h1>{nickname}님의 책 CHOICE</h1>                             
+                              <h2 className="home-book-nickname-frame">
+                                    <span className="home-book-nickname">'{nickname}'</span>
+                                    <span className="home-book-nickname-post"> 님의 책</span>
+                              </h2>                             
                               <Slider {...settings}>
                                     {this.renderImage(allbooks[nickname], nickname)}
                               </Slider>
@@ -123,8 +126,8 @@ class Home extends Component {
          <div>
             {/* 맨 윗줄 - 회원관리정보 */}
             <div className="home-member text-right">
-               <span>안녕하세요, {this.state.nickname}님!</span>
-               <Link to="/mypage" className="home-member-btn btn btn-primary">마이페이지</Link>
+               <span>안녕하세요, <span className="home-nickname">{this.state.nickname}</span>님!</span>
+               <Link to="/mypage" className="home-member-btn btn btn-primary">내 책 수정하기</Link>
                <Link to="/" className="home-member-btn btn btn-danger" onClick={this.clickLogOut}>로그아웃</Link>
             </div>
 
@@ -139,21 +142,21 @@ class Home extends Component {
                               }}
                   >
                   {/* Modal 내용 - 회원이 작성한 책정보*/}
-                  <div className="home-book-text">
-                        <label className="">책명</label>
-                        <p>{this.state.bookName}</p>
+                  <div>
+                        <label className="home-book-text-title">책 이름</label>
+                        <p className="home-book-text-content">{this.state.bookName}</p>
                   </div>
-                  <div className="home-book-text">
-                        <label className="">저자</label>
-                        <p>{this.state.author}</p>
+                  <div>
+                        <label className="home-book-text-title">저자</label>
+                        <p className="home-book-text-content">{this.state.author}</p>
                   </div>
-                  <div className="home-book-text">
-                        <label className="">발행일</label>
-                        <p>{this.state.pubDate}</p>
+                  <div>
+                        <label className="home-book-text-title">발행일</label>
+                        <p className="home-book-text-content">{this.state.pubDate}</p>
                   </div>
-                  <div className="home-book-text">
-                        <label className="">나의 메모</label>
-                        <p>{this.state.memo}</p>
+                  <div>
+                        <label className="home-book-text-title">메모</label>
+                        <p className="home-book-text-content">{this.state.memo}</p>
                   </div>
                   </Modal>
             </div>

@@ -41,30 +41,33 @@ class MyPage extends Component {
    addSubmit(event){
       //console.log(event.target);
       event.preventDefault();
-
-      let addForm = document.getElementById('addForm');
-      let formData = new FormData(addForm);
-      console.log(formData);
-
-      axios.post('/mypage/add', formData)
-         .then( (res) => {
-            console.log(res.data);
-            this.props.history.push('/mypage');
-        });
+      
+      if(window.confirm('추가하시겠습니까?')){
+        let addForm = document.getElementById('addForm');
+        let addData = new FormData(addForm);
+        
+        axios.post('/mypage/add', addData)
+            .then( (res) => {
+                console.log(res.data);
+                this.props.history.push('/mypage');
+            });
+      }
    }
 
    modifySubmit(event){
     //console.log(event.target);
-    event.preventDefault();
+     event.preventDefault();
 
-    let modifyForm = document.getElementById('modifyForm');
-    let formData = new FormData(modifyForm);
-    
-    axios.post('/mypage/modify', formData)
-       .then( (res) => {
+     if(window.confirm('수정하시겠습니까?')){
+        let modifyForm = document.getElementById('modifyForm');
+        let modifyData = new FormData(modifyForm);
+        
+        axios.post('/mypage/modify', modifyData)
+        .then( (res) => {
             console.log(res.data);
             this.props.history.push('/mypage');
-      });
+        });
+     }
    }
 
    bookAddModal(){
@@ -103,41 +106,40 @@ class MyPage extends Component {
             <div className="mypage-book-top text-right">
                 <button className="mypage-btn btn btn-primary" 
                     onClick={() => this.bookModifyModal(book)}
-                >정보 수정</button>
+                >정보 수정하기</button>
                 <button className="mypage-btn btn btn-danger" 
                     onClick={() => this.bookDelete(book.bookImage)} 
-                >삭제</button>
+                >삭제하기</button>
             </div>
-            <div className="mypage-book-content">
+            <div>
                 <div>
                     <img src={require(`../../server/uploads/${book.nickname}/${book.bookImage}`)} 
-                        width="250px"
-                        height="300px" 
+                        className="mypage-book-image" 
                         alt="welcome" 
                     />
                 </div>
                 <div className="mypage-book-text">
-                    <label className="">책명</label>
-                    <div className="">
-                        <p>{book.bookName}</p>
+                    <label>책명</label>
+                    <div>
+                        <p className="mypage-book-content">{book.bookName}</p>
                     </div>
                 </div>
                 <div className="mypage-book-text">
-                    <label className="">저자</label>
-                    <div className="">
-                        <p>{book.author}</p>
+                    <label>저자</label>
+                    <div>
+                        <p className="mypage-book-content">{book.author}</p>
                     </div>
                 </div>
                 <div className="mypage-book-text">
-                    <label className="">발행일</label>
-                    <div className="">
-                        <p>{book.pubDate}</p>
+                    <label>발행일</label>
+                    <div>
+                        <p className="mypage-book-content">{book.pubDate}</p>
                     </div>
                 </div>
                 <div className="mypage-book-text">
-                    <label className="">나의 메모</label>
-                    <div className="">
-                        <p>{book.memo}</p>
+                    <label>나의 메모</label>
+                    <div>
+                        <p className="mypage-book-content">{book.memo}</p>
                     </div>
                 </div>
             </div>
@@ -157,26 +159,26 @@ class MyPage extends Component {
                 />
               </div>
               <div className="mypage-add-text">
-                  <label className="">책명</label>
-                  <div className="">
+                  <label>책명</label>
+                  <div>
                         <input name="bookName" className="form-control" type="text" />
                   </div>
               </div>
               <div className="mypage-add-text">
-                  <label className="">저자</label>
-                  <div className="">
+                  <label>저자</label>
+                  <div>
                         <input name="author" className="form-control" type="text" />
                   </div>
               </div>
               <div className="mypage-add-text">
-                  <label className="">발행일</label>
-                  <div className="">
+                  <label>발행일</label>
+                  <div>
                         <input name="pubDate" className="form-control" type="text" />
                   </div>
               </div>
               <div className="mypage-add-text">
-                  <label className="">MEMO</label>
-                  <div className="">
+                  <label>MEMO</label>
+                  <div>
                         <textarea name="memo" className="form-control" type="text" />
                   </div>
               </div>
@@ -199,8 +201,8 @@ class MyPage extends Component {
                     />
               </div>
               <div className="mypage-modify-text">
-                    <label className="">책명</label>
-                    <div className="">
+                    <label>책명</label>
+                    <div>
                         <input name="bookName" 
                                className="form-control" 
                                type="text" 
@@ -210,8 +212,8 @@ class MyPage extends Component {
                     </div>
               </div>
               <div className="mypage-modify-text">
-                    <label className="">저자</label>
-                    <div className="">
+                    <label>저자</label>
+                    <div>
                         <input name="author" 
                                className="form-control" 
                                type="text" 
@@ -221,8 +223,8 @@ class MyPage extends Component {
                     </div>
               </div>
               <div className="mypage-modify-text">
-                    <label className="">발행일</label>
-                    <div className="">
+                    <label>발행일</label>
+                    <div>
                         <input name="pubDate" 
                                className="form-control" 
                                type="text" 
@@ -232,8 +234,8 @@ class MyPage extends Component {
                     </div>
               </div>
               <div className="mypage-modify-text">
-                    <label className="">MEMO</label>
-                    <div className="">
+                    <label>MEMO</label>
+                    <div>
                             <textarea name="memo" 
                                 className="form-control" 
                                 type="text" 
@@ -255,10 +257,10 @@ class MyPage extends Component {
             {/* 맨 윗줄 - 회원관리정보 */}
             <div>
                <span>
-                  <button className="mypage-btn btn btn-primary" onClick={this.bookAddModal} >책 추가</button>
+                  <button className="mypage-btn btn btn-primary" onClick={this.bookAddModal} >책 추가하기</button>
                </span>
                <span className="mypage-top-right">
-                  <Link to="/home" className="mypage-btn btn btn-primary">홈 화면</Link>
+                  <Link to="/home" className="mypage-btn btn btn-primary">홈 화면으로 돌아가기</Link>
                   <Link to="/" className="mypage-btn btn btn-danger" onClick={this.clickLogOut}>로그아웃</Link>
                </span>
             </div>

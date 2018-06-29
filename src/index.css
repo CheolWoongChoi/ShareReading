@@ -53,8 +53,7 @@
 }
 
 .register-label{
-   width: 10rem;
-   padding-right: 2rem;
+   width: 11rem;
 }
 
 .register-field{
@@ -73,6 +72,7 @@
 }
 
 .register-error{
+   margin-left: 11rem;
    font-size: 1.5rem;
    font-weight: bold;
    color: tomato;
@@ -80,6 +80,11 @@
 
 
 /* Home Page */
+
+.home-nickname{
+   font-weight: bold;
+   font-size: 2rem;
+}
 
 .home-member{
    padding: 15px;
@@ -90,19 +95,66 @@
    margin: 1rem;
 }
 
+.home-book-nickname-frame{
+   margin-top: 3rem;
+}
+
+.home-book-nickname{
+   color: rgba(0, 0, 0);
+}
+
+.home-book-nickname-post{
+   font-size: 2.3rem;
+   color: rgba(0, 0, 0, 0.5);
+}
+
 .home-book-list{
    padding: 5rem 10rem;
    margin: auto 0;
-   width: 125rem;
+   background-color: rgba(220, 220, 220, 0.3);
+}
+
+.home-book-image-frame{
+   display: flex !important;
+   margin-top: 2rem;
+   margin-bottom: 4rem;
+   justify-content:center;
+   align-items:center;
+
+   outline:none;
 }
 
 .home-book-image{
-   margin: 0 auto;
+   width: 200px;
+   height: 250px;
+   border: rgb(102, 102, 102) solid 2px;
 }
 
 .home-book-image:hover{
-   background-color: powderblue;
+   width: 200px;
+   height: 250px;
+   cursor: pointer;
 }
+
+.home-book-text-title{
+   font-size: 2rem;
+}
+
+.home-book-text-content{
+   font-size: 1.5rem;
+   margin-bottom: 2.5rem;
+}
+
+.slick-list {
+   margin-bottom: 2rem;
+   border-bottom: rgb(102, 102, 102) solid 2px;
+}
+
+.slick-prev:before, .slick-next:before{
+   font-size: 40px;
+   color: black;
+}
+
 
 /* Mypage Page */
 
@@ -122,17 +174,25 @@
 .mypage-book{
    margin: 5% 20%;
    padding: 3% 5% 5% 10%;
-   border: solid 0.5px;
-   border-color: blue;
+   background-color: rgba(220, 220, 220, 0.3);
    font-size: 20px;
 }
 
 .mypage-book-top{
    width: 100%;
+
+}
+.mypage-book-image{
+   width: 200px;
+   height: 250px;
+   border: rgba(102, 102, 102) solid 2px
 }
 
 .mypage-book-text{
    margin-top: 30px;
+}
+
+.mypage-book-content{
 }
 
 .mypage-add-text{
