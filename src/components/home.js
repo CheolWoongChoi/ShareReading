@@ -46,22 +46,31 @@ class Home extends Component {
       };
 
       this.clickImage = this.clickImage.bind(this);
+      this.clickLogOut = this.clickLogOut.bind(this);
+   }
+
+   componentWillMount(){
+      axios.get('/sessionInfo')
+         .then( (res) => {
+            if(res.data)
+            this.setState({nickname: res.data.nickname});
+            else{
+                  window.alert('로그인이 필요합니다!');
+                  this.props.history.push('/');
+            }
+      });
    }
 
    componentDidMount(){
-      if(!this.state.nickname){
-         axios.get('/sessionInfo')
-            .then( (res) => {
-               this.setState({nickname: res.data.nickname});
-            });
-      }
-
       if(!this.props.allbooks.length)
         this.props.fetchAllBooks();
    }
 
    clickLogOut(){
-      axios.get('/auth/logout');
+      axios.get('/auth/logout')
+            .then( (res) => {
+               this.props.history.push('/');
+            });
    }
 
    clickImage(bookInfo){
@@ -102,7 +111,30 @@ class Home extends Component {
             slidesToShow: 4,
             slidesToScroll: 1,
             nextArrow: <NextArrow />,
-            prevArrow: <PrevArrow />
+            prevArrow: <PrevArrow />,
+            responsive: [
+                  {
+                        breakpoint: 1000,
+                        settings: {
+                              slidesToShow: 3,
+                              slidesToScroll: 1
+                        }
+                  },
+                  {
+                        breakpoint: 800,
+                        settings: {
+                              slidesToShow: 2,
+                              slidesToScroll: 1
+                        }
+                  },
+                  {
+                        breakpoint: 550,
+                        settings: {
+                              slidesToShow: 1,
+                              slidesToScroll: 1
+                        }
+                  }
+            ]
       };
 
       return Object.getOwnPropertyNames(allbooks)
@@ -127,8 +159,21 @@ class Home extends Component {
             {/* 맨 윗줄 - 회원관리정보 */}
             <div className="home-member text-right">
                <span>안녕하세요, <span className="home-nickname">{this.state.nickname}</span>님!</span>
-               <Link to="/mypage" className="home-member-btn btn btn-primary">내 책 수정하기</Link>
-               <Link to="/" className="home-member-btn btn btn-danger" onClick={this.clickLogOut}>로그아웃</Link>
+               <Link 
+                  to={{
+                       pathname: "/mypage",
+                       state: {nickname: this.state.nickname}
+                  }} 
+                  className="home-member-btn btn btn-primary"
+               >
+                  내 책 수정하기
+               </Link>
+               <button
+                  className="home-member-btn btn btn-danger" 
+                  onClick={this.clickLogOut}
+               >
+                  로그아웃
+               </button>
             </div>
 
             {/* 회원들의 책 이미지정보 */}

@@ -60,11 +60,16 @@ module.exports = function(passport){
 
    route.post('/login', 
       passport.authenticate('local', { failureRedirect: '/auth/login/error' }),
-      (req, res) => { res.redirect('/auth/login/success?authId='+req.user.authId); }
+      (req, res) => { res.redirect('/auth/login/success'); }
    );
    
    route.get('/login/success', (req, res) => {
-      res.send(true);
+      res.send(
+            {
+              isLogin: true,
+              nickname: req.session.passport.user.nickname
+            }
+      );
    });
    
    route.get('/login/error', (req, res) => {
@@ -73,7 +78,9 @@ module.exports = function(passport){
 
    route.get('/logout', (req, res) => {
       req.logout();
-      req.session.save((err) => {});
+      req.session.save((err) => {
+         res.send(true);
+      });
    });
 
 

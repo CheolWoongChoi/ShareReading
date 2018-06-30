@@ -6,6 +6,15 @@ import axios from 'axios';
 
 class Login extends Component {
 
+  componentDidMount(){
+    axios.get('/sessionInfo')
+        .then( (res) => {
+            if(res.data){
+                this.props.history.push('/home'); 
+            }
+        });
+  } 
+
   renderField(field){
 
     const { meta : {touched, error} } = field;
@@ -31,8 +40,8 @@ class Login extends Component {
     axios.post('/auth/login', values)
       .then( (res) => {
         if(res.data){
-          //console.log(res.data);
-          this.props.history.push('/home');
+          if(res.data.isLogin)
+              this.props.history.push('/home');
         }
         else{
            this.props.alert.show('(아이디) 또는 (비밀번호)를 잘못입력하셨습니다!');

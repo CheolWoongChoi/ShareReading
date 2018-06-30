@@ -14,6 +14,8 @@ class MyPage extends Component {
 
       super(props);
       this.state = {
+        nickname: '',
+
         isAdd: false,
         isModify: false,
 
@@ -28,14 +30,30 @@ class MyPage extends Component {
       this.bookDelete = this.bookDelete.bind(this);
       this.addSubmit = this.addSubmit.bind(this);
       this.modifySubmit = this.modifySubmit.bind(this);
+      this.clickLogOut = this.clickLogOut.bind(this);
+   }
+
+   componentWillMount(){
+        axios.get('/sessionInfo')
+            .then( (res) => {
+                if(res.data)
+                    this.setState({nickname: res.data.nickname});
+                else{
+                        window.alert('로그인이 필요합니다!');
+                        this.props.history.push('/');
+                }
+        });
    }
 
    componentDidMount(){
-      this.props.fetchBooks();
+       this.props.fetchBooks();
    }
 
    clickLogOut(){
-      axios.get('/auth/logout');
+      axios.get('/auth/logout')
+        .then( (res) => {
+            this.props.history.push('/');
+        });
    }
 
    addSubmit(event){
@@ -45,11 +63,23 @@ class MyPage extends Component {
       if(window.confirm('추가하시겠습니까?')){
         let addForm = document.getElementById('addForm');
         let addData = new FormData(addForm);
-        
+
+        for(let value of addData.values()){
+            if(value.size === 0 || value.length === 0){
+                window.alert('모든 데이터를 입력하셔야 합니다!');
+                return;
+            }
+        }
+
         axios.post('/mypage/add', addData)
             .then( (res) => {
-                console.log(res.data);
-                this.props.history.push('/mypage');
+                //console.log(res.data);
+                if(res.data){
+                    window.alert('성공적으로 책이 추가되었습니다!');
+                    this.props.history.push('/mypage');
+                } else{
+                    window.alert('일시적인 오류로 다시 시도해주세요.');
+                }
             });
       }
    }
@@ -62,11 +92,23 @@ class MyPage extends Component {
         let modifyForm = document.getElementById('modifyForm');
         let modifyData = new FormData(modifyForm);
         
+        for(let value of modifyData.values()){
+            if(value.size === 0 || value.length === 0){
+                window.alert('모든 데이터를 입력하셔야 합니다!');
+                return;
+            }
+        }
+
         axios.post('/mypage/modify', modifyData)
-        .then( (res) => {
-            console.log(res.data);
-            this.props.history.push('/mypage');
-        });
+            .then( (res) => {
+                //console.log(res.data);
+                if(res.data){
+                    window.alert('성공적으로 책이 수정되었습니다!');
+                    window.location.reload();
+                } else{
+                    window.alert('일시적인 오류로 다시 시도해주세요.');
+                }
+            });
      }
    }
 
@@ -92,7 +134,12 @@ class MyPage extends Component {
            //console.log('삭제');
            axios.delete(`/mypage/delete?bookImage=${bookImage}`)
             .then( (res) => {
-                this.props.history.push('/mypage');
+                if(res.data){
+                    window.alert('성공적으로 책이 삭제되었습니다!');
+                    this.props.history.push('/mypage');
+                } else{
+                    window.alert('일시적인 오류로 다시 시도해주세요.');
+                }
             });
        }
        else{
@@ -119,7 +166,7 @@ class MyPage extends Component {
                     />
                 </div>
                 <div className="mypage-book-text">
-                    <label>책명</label>
+                    <label>책 이름</label>
                     <div>
                         <p className="mypage-book-content">{book.bookName}</p>
                     </div>
@@ -159,7 +206,7 @@ class MyPage extends Component {
                 />
               </div>
               <div className="mypage-add-text">
-                  <label>책명</label>
+                  <label>책 이름</label>
                   <div>
                         <input name="bookName" className="form-control" type="text" />
                   </div>
@@ -179,7 +226,7 @@ class MyPage extends Component {
               <div className="mypage-add-text">
                   <label>MEMO</label>
                   <div>
-                        <textarea name="memo" className="form-control" type="text" />
+                        <textarea name="memo" className="form-control" type="text" rows="3"/>
                   </div>
               </div>
               <div className="mypage-add-footer text-center">
@@ -201,7 +248,7 @@ class MyPage extends Component {
                     />
               </div>
               <div className="mypage-modify-text">
-                    <label>책명</label>
+                    <label>책 이름</label>
                     <div>
                         <input name="bookName" 
                                className="form-control" 
@@ -238,7 +285,8 @@ class MyPage extends Component {
                     <div>
                             <textarea name="memo" 
                                 className="form-control" 
-                                type="text" 
+                                type="text"
+                                rows="3" 
                                 value={this.state.memo}
                                 onChange={(e) => this.setState({memo: e.target.value})} 
                             />
@@ -260,8 +308,12 @@ class MyPage extends Component {
                   <button className="mypage-btn btn btn-primary" onClick={this.bookAddModal} >책 추가하기</button>
                </span>
                <span className="mypage-top-right">
-                  <Link to="/home" className="mypage-btn btn btn-primary">홈 화면으로 돌아가기</Link>
-                  <Link to="/" className="mypage-btn btn btn-danger" onClick={this.clickLogOut}>로그아웃</Link>
+                  <Link to="/home"
+                        className="mypage-btn btn btn-primary"
+                   >
+                     홈 화면으로 돌아가기
+                   </Link>
+                  <button className="mypage-btn btn btn-danger" onClick={this.clickLogOut}>로그아웃</button>
                </span>
             </div>
 
