@@ -30,7 +30,7 @@ class Register extends Component {
   }
   
   onSubmit(values){
-      axios.post('/auth/register', values)
+      axios.post('/api/auth/register', values)
          .then( (res) => {
 
             console.log(res.data);

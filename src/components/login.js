@@ -7,7 +7,7 @@ import axios from 'axios';
 class Login extends Component {
 
   componentDidMount(){
-    axios.get('/sessionInfo')
+    axios.get('/api/sessionInfo')
         .then( (res) => {
             if(res.data){
                 this.props.history.push('/home'); 
@@ -37,7 +37,7 @@ class Login extends Component {
   }
   
   onSubmit(values){
-    axios.post('/auth/login', values)
+    axios.post('/api/auth/login', values)
       .then( (res) => {
         if(res.data){
           if(res.data.isLogin)

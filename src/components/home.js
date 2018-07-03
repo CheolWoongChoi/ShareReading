@@ -50,7 +50,7 @@ class Home extends Component {
    }
 
    componentWillMount(){
-      axios.get('/sessionInfo')
+      axios.get('/api/sessionInfo')
          .then( (res) => {
             if(res.data)
             this.setState({nickname: res.data.nickname});
@@ -67,7 +67,7 @@ class Home extends Component {
    }
 
    clickLogOut(){
-      axios.get('/auth/logout')
+      axios.get('/api/auth/logout')
             .then( (res) => {
                this.props.history.push('/');
             });
@@ -90,7 +90,7 @@ class Home extends Component {
             return userBookInfo.map( (Info) => {
                   return (
                   <div key={Info.bookImage} className="home-book-image-frame"> 
-                     <img src={require(`../../server/uploads/${nickname}/${Info.bookImage}`)} 
+                     <img src={require(`${__dirname}/../../server/uploads/${nickname}/${Info.bookImage}`)} 
                           className="home-book-image"
                           alt={Info.bookImage}
                           onClick={() => {this.clickImage(Info)}}

@@ -16,8 +16,6 @@ module.exports = function(passport){
          
          //Duplicate ID
          if(result.length){
-            console.log('register id result');
-            console.log(result);
             res.send('DUPL-ID');
          } 
          else{
@@ -26,8 +24,6 @@ module.exports = function(passport){
             
                   //Duplicate Nickname
                   if(result.length){
-                     console.log('register nickname result');
-                     console.log(result);
                      res.send('DUPL-NICK');
                   } 
                   else{
@@ -59,8 +55,8 @@ module.exports = function(passport){
    });
 
    route.post('/login', 
-      passport.authenticate('local', { failureRedirect: '/auth/login/error' }),
-      (req, res) => { res.redirect('/auth/login/success'); }
+      passport.authenticate('local', { failureRedirect: '/api/auth/login/error' }),
+      (req, res) => { res.redirect('/api/auth/login/success'); }
    );
    
    route.get('/login/success', (req, res) => {

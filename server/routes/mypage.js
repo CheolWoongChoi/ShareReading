@@ -45,7 +45,6 @@ route.get('/books', (req, res) => {
          res.send('Internal Server Error : Fetch Books Error');
       }
       else{
-         //console.log(result);
          res.send(result);
       }
    });
@@ -53,7 +52,6 @@ route.get('/books', (req, res) => {
 
 route.post('/add', upload.single('bookImage'), (req, res) => {
    
-   //res.send('Uploaded: '+req.file.filename);
    let sql = `INSERT INTO books (nickname, bookName, bookImage, author, pubDate, memo) VALUES ?`;
    let values = [
                     [ req.session.passport.user.nickname,
@@ -63,7 +61,6 @@ route.post('/add', upload.single('bookImage'), (req, res) => {
                      req.body.pubDate,
                      req.body.memo ]
                 ];
-   //console.log(req.body);
    
    conn.query(sql, [values], (err, result) => {
       if(err){
@@ -132,7 +129,6 @@ route.delete('/delete', (req, res) => {
 
 route.post('/add', upload.single('bookImage'), (req, res) => {
    
-   //res.send('Uploaded: '+req.file.filename);
    let sql = `INSERT INTO books (nickname, bookName, bookImage, author, pubDate, memo) VALUES ?`;
    let values = [
                     [ req.session.passport.user.nickname,
@@ -149,7 +145,6 @@ route.post('/add', upload.single('bookImage'), (req, res) => {
          res.send('Internal Server Error : Database Upload Error');
       }
       else{
-         //console.log(result);
          res.redirect('/mypage/add/success');
       }
    });

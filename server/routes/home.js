@@ -12,7 +12,6 @@ route.get('/users', (req, res) => {
          console.log(err);
       }
       else{
-         //console.log(result);
          res.send(result);
       }
    });
@@ -27,7 +26,6 @@ route.get('/allbooks', (req, res) => {
          console.log(err);
       }
       else{
-         //console.log(result);
          res.send(result);
       }
    });
@@ -42,8 +40,6 @@ route.get('/images', (req, res) => {
          console.log(err);
       }
       else{
-         //console.log('***books***');
-         //console.log(result);
          res.send(result);
       }
    });

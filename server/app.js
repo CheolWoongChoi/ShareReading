@@ -1,18 +1,18 @@
 
+const path = require('path');
 const app = require('./config/express')();
 const passport = require('./config/passport')(app);
 
-
 const auth = require('./routes/auth')(passport);
-app.use('/auth', auth);
+app.use('/api/auth', auth);
 
 const home = require('./routes/home');
-app.use('/home', home);
+app.use('/api/home', home);
 
 const mypage = require('./routes/mypage');
-app.use('/mypage', mypage);
+app.use('/api/mypage', mypage);
 
-app.get('/sessionInfo', (req, res) => {   
+app.get('/api/sessionInfo', (req, res) => {   
    if(req.session.passport.user)
       res.send(req.session.passport.user);
    else{
@@ -20,9 +20,9 @@ app.get('/sessionInfo', (req, res) => {
    }
 });
 
-app.get('/', (req, res) => {
-   res.send('WELCOME TO SR SERVER');
-})
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../build/index.html'));
+});
 
 app.listen(5000, () => {
    console.log("Server Listening 5000 port...");

@@ -5,7 +5,7 @@ export const FETCH_ALL_BOOKS = 'FETCH_ALL_BOOKS';
 
 export function fetchBooks(){
    
-   const request = axios.get('/mypage/books');
+   const request = axios.get('/api/mypage/books');
    
    return {
       type: FETCH_BOOKS,
@@ -15,7 +15,7 @@ export function fetchBooks(){
 
 export function fetchAllBooks(){
    
-   const request = axios.get('/home/allbooks');
+   const request = axios.get('/api/home/allbooks');
    
    return {
       type: FETCH_ALL_BOOKS,

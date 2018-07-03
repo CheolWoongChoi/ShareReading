@@ -34,7 +34,7 @@ class MyPage extends Component {
    }
 
    componentWillMount(){
-        axios.get('/sessionInfo')
+        axios.get('/api/sessionInfo')
             .then( (res) => {
                 if(res.data)
                     this.setState({nickname: res.data.nickname});
@@ -50,7 +50,7 @@ class MyPage extends Component {
    }
 
    clickLogOut(){
-      axios.get('/auth/logout')
+      axios.get('/api/auth/logout')
         .then( (res) => {
             this.props.history.push('/');
         });
@@ -71,12 +71,12 @@ class MyPage extends Component {
             }
         }
 
-        axios.post('/mypage/add', addData)
+        axios.post('/api/mypage/add', addData)
             .then( (res) => {
                 //console.log(res.data);
                 if(res.data){
                     window.alert('성공적으로 책이 추가되었습니다!');
-                    this.props.history.push('/mypage');
+                    window.location.reload();
                 } else{
                     window.alert('일시적인 오류로 다시 시도해주세요.');
                 }
@@ -99,7 +99,7 @@ class MyPage extends Component {
             }
         }
 
-        axios.post('/mypage/modify', modifyData)
+        axios.post('/api/mypage/modify', modifyData)
             .then( (res) => {
                 //console.log(res.data);
                 if(res.data){
@@ -132,11 +132,11 @@ class MyPage extends Component {
    bookDelete(bookImage){
        if(window.confirm('삭제하시겠습니까?')){
            //console.log('삭제');
-           axios.delete(`/mypage/delete?bookImage=${bookImage}`)
+           axios.delete(`/api/mypage/delete?bookImage=${bookImage}`)
             .then( (res) => {
                 if(res.data){
                     window.alert('성공적으로 책이 삭제되었습니다!');
-                    this.props.history.push('/mypage');
+                    window.location.reload();
                 } else{
                     window.alert('일시적인 오류로 다시 시도해주세요.');
                 }
@@ -160,7 +160,7 @@ class MyPage extends Component {
             </div>
             <div>
                 <div>
-                    <img src={require(`../../server/uploads/${book.nickname}/${book.bookImage}`)} 
+                    <img src={require(`${__dirname}/../../server/uploads/${book.nickname}/${book.bookImage}`)} 
                         className="mypage-book-image" 
                         alt="welcome" 
                     />
