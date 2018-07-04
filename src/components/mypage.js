@@ -76,6 +76,7 @@ class MyPage extends Component {
                 //console.log(res.data);
                 if(res.data){
                     window.alert('성공적으로 책이 추가되었습니다!');
+                    //this.props.history.push('/mypage');
                     window.location.reload();
                 } else{
                     window.alert('일시적인 오류로 다시 시도해주세요.');
@@ -148,8 +149,9 @@ class MyPage extends Component {
    }
 
    renderBook(book){
+      
       return(
-        <div key={book.bookImage} className="mypage-book">
+        <div key={book.bookImage} className="mypage-book"> 
             <div className="mypage-book-top text-right">
                 <button className="mypage-btn btn btn-primary" 
                     onClick={() => this.bookModifyModal(book)}
@@ -160,9 +162,9 @@ class MyPage extends Component {
             </div>
             <div>
                 <div>
-                    <img src={require(`${__dirname}/../../server/uploads/${book.nickname}/${book.bookImage}`)} 
-                        className="mypage-book-image" 
-                        alt="welcome" 
+                    <img src={`/uploads/${book.nickname}/${book.bookImage}`} 
+                         className="mypage-book-image" 
+                         alt="welcome" 
                     />
                 </div>
                 <div className="mypage-book-text">

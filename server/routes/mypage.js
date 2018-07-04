@@ -127,31 +127,4 @@ route.delete('/delete', (req, res) => {
    });
 });
 
-route.post('/add', upload.single('bookImage'), (req, res) => {
-   
-   let sql = `INSERT INTO books (nickname, bookName, bookImage, author, pubDate, memo) VALUES ?`;
-   let values = [
-                    [ req.session.passport.user.nickname,
-                     req.body.bookName,
-                     req.file.originalname,
-                     req.body.author,
-                     req.body.pubDate,
-                     req.body.memo ]
-                ];
-   
-   conn.query(sql, [values], (err, result) => {
-      if(err){
-         console.log(err);
-         res.send('Internal Server Error : Database Upload Error');
-      }
-      else{
-         res.redirect('/mypage/add/success');
-      }
-   });
-});
-
-route.get('/add/success', (req, res) => {
-   res.send(true);
-})
-
 module.exports = route

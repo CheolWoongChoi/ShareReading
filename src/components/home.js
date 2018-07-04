@@ -85,12 +85,12 @@ class Home extends Component {
    }
 
    renderImage(userBookInfo, nickname){
-         
+
       if(userBookInfo){
             return userBookInfo.map( (Info) => {
                   return (
                   <div key={Info.bookImage} className="home-book-image-frame"> 
-                     <img src={require(`${__dirname}/../../server/uploads/${nickname}/${Info.bookImage}`)} 
+                     <img src={`/uploads/${nickname}/${Info.bookImage}`} 
                           className="home-book-image"
                           alt={Info.bookImage}
                           onClick={() => {this.clickImage(Info)}}

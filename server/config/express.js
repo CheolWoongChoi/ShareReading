@@ -14,7 +14,9 @@ module.exports = function(){
    app.use(session(session_info));
 
    //client - static files
-   app.use(express.static(path.join(__dirname, '../../build')));
+   app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));
+   app.use(express.static(path.join(__dirname, '/../../build')));
+   
 
    return app;
 }
