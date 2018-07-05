@@ -24,6 +24,6 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/../build/index.html'));
 });
 
-app.listen(5000, () => {
-   console.log("Server Listening 5000 port...");
+app.listen(80, () => {
+   console.log("Share Reading Server Running...");
 });
