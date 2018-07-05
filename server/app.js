@@ -13,8 +13,12 @@ const mypage = require('./routes/mypage');
 app.use('/api/mypage', mypage);
 
 app.get('/api/sessionInfo', (req, res) => {   
-   if(req.session.passport.user)
+   if(!req.session.passport){
+       res.send(false);
+   }
+   else if(req.session.passport.user){
       res.send(req.session.passport.user);
+   }
    else{
       res.send(false);
    }
