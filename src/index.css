@@ -43,6 +43,64 @@
 }
 
 
+/* Login Page - Mobile */
+
+/* Gereral Android & iPhone*/
+@media(max-width:420px){
+
+    .login-title{
+        margin: 2rem auto;
+        font-size: 3.3rem;
+        font-weight: bold;
+        color: skyblue;
+        border-color: #2e6da4;
+     }
+
+     .login-error{
+         font-size: 1.3rem;
+     }
+}
+
+
+/* Login Page - iPhone5/SE */
+
+@media(max-height:600px){
+    
+    .login-title{
+        margin: 1.5rem;
+        font-size: 3rem;
+        font-weight: bold;
+        color: skyblue;
+        border-color: #2e6da4;
+    }
+
+    .login-subtitle{
+        font-size: 1.3rem;
+    }
+
+    img{
+        width: 80%;
+        height: 80%;
+    }
+
+    button, input{
+        width: 80% !important;
+    }
+
+    a{
+        width: 85% !important;
+    }
+
+    .login-error{
+        font-size: 1.3rem;
+    }
+
+    .login-register{
+        text-align: center;
+    }
+}
+
+
 /* Register Page */
 
 .register-title{
@@ -76,6 +134,69 @@
    font-size: 1.5rem;
    font-weight: bold;
    color: tomato;
+}
+
+
+/* Register Page - Mobile */
+
+@media(max-width:420px){
+
+    .register-title{
+        padding: 2rem;
+        font-size: 3rem;
+        font-weight: bold;
+        color: skyblue;
+    }
+
+    .register-label{
+        margin-left: 1.5rem;
+        width: 10rem;
+    }
+
+    .form-inline .form-group{
+        margin-bottom: 3px;
+    }
+
+    .register-label + .form-control{
+        display: inline;
+        width: 55% !important;
+    }
+
+    .register-error{
+        margin-left: 5rem;
+        font-size: 1.3rem;
+    }
+
+    .register-submit, .register-button{
+        width: 65%;
+    }
+}
+
+@media(max-width:380px){
+
+    .register-error{
+        margin-left: 7rem;
+        font-size: 1.3rem;
+    }
+}
+
+@media(max-height:600px){
+
+    .register-submit{
+        margin-top: 2rem;
+    }
+
+    .register-submit{
+        width: 70% !important;
+    }
+
+    .register-button{
+        width: 70% !important;
+    }
+
+    .register-error{
+        margin-left: 9rem;
+    }
 }
 
 
@@ -156,6 +277,59 @@
 }
 
 
+/* Home Page - Mobile */
+
+@media(max-width:420px){
+    .home-member{
+        padding-top: 2rem;
+        text-align: center;
+    }
+
+    .home-member > span, .home-nickname {
+        font-size: 2rem !important;
+    }
+
+    .home-member-btn{
+        display: block;
+        margin: 1.5rem auto;
+        width: 70%;
+    }
+
+    .home-book-nickname-frame{
+        margin-top: 0rem;
+        padding-top: 2rem;
+        text-align: center;
+    }
+
+    .home-book-list{
+        padding: 6rem;
+    }
+
+    .home-book-list h2{
+        font-size: 2.3rem;
+    }
+
+    .home-book-image{
+        width: 70%;
+        height: 70%;
+    }
+
+    .slick-prev:before, .slick-next:before{
+        font-size: 40px;
+    }
+}
+
+@media(max-height:600px){
+    a + .home-member-btn{
+        width: 85% !important; 
+    }
+
+    .home-book-nickname-post{
+        font-size: 1.2rem;
+    }
+}
+
+
 /* Mypage Page */
 
 .mypage-top{
@@ -180,8 +354,8 @@
 
 .mypage-book-top{
    width: 100%;
-
 }
+
 .mypage-book-image{
    width: 200px;
    height: 250px;
@@ -190,9 +364,6 @@
 
 .mypage-book-text{
    margin-top: 30px;
-}
-
-.mypage-book-content{
 }
 
 .mypage-add-text{
@@ -215,4 +386,63 @@
 
 .mypage-modify-footer{
    margin-top: 30px;
+}
+
+
+/* MyPage - Mobile */
+
+@media(max-width: 420px){
+
+    .mypage-top{
+        padding: 0
+    }
+
+    .mypage-top-right{
+        float: none;
+    }
+
+    span > .mypage-btn{
+        display: block;
+        margin: 1.5rem auto;
+        width: 60%;
+    }
+
+    .mypage-home-btn{
+        background-color: #f0ad4e;
+        border-color: #eea236;
+    }
+
+    .mypage-book-top{
+        margin-top: 3rem;
+        padding: 5rem;
+        text-align: center;
+    }
+
+    .mypage-book{
+        margin: 0 auto;
+        padding: 0;
+        background-color: rgba(220, 220, 220, 0.3) !important;
+    }
+
+    .mypage-book-image-frame{
+        text-align: center;
+    }
+
+    .mypage-book-text{
+        padding: 1.1rem;
+        text-align: center;
+        word-break: break-all;
+    }
+
+    .mypage-book-text > label{
+        font-size: 2.5rem;
+    }
+}
+
+/* iPhone 5/SE */
+
+@media(max-height: 600px){
+    span > a {
+        width: 80% !important;
+    }
 }

@@ -49,19 +49,21 @@ class Home extends Component {
       this.clickLogOut = this.clickLogOut.bind(this);
    }
 
-   componentWillMount(){
+   componentDidMount(){
       axios.get('/api/sessionInfo')
          .then( (res) => {
-            if(res.data)
-            this.setState({nickname: res.data.nickname});
-            else{
-                  window.alert('로그인이 필요합니다!');
-                  this.props.history.push('/');
-            }
-      });
-   }
+            console.log('Home Session Info');
+            console.log(res.data);
 
-   componentDidMount(){
+            if(res.data){
+               this.setState({nickname: res.data.nickname});
+            }
+            // else{
+            //    window.alert('로그인이 필요합니다!');
+            //    this.props.history.push('/');
+            // }
+      });
+
       if(!this.props.allbooks.length)
         this.props.fetchAllBooks();
    }
@@ -90,7 +92,8 @@ class Home extends Component {
             return userBookInfo.map( (Info) => {
                   return (
                   <div key={Info.bookImage} className="home-book-image-frame"> 
-                     <img src={`/uploads/${nickname}/${Info.bookImage}`} 
+                     {/* <img src={`/uploads/${nickname}/${Info.bookImage}`} */}
+                     <img src={require(`../../server/uploads/${nickname}/${Info.bookImage}`)} 
                           className="home-book-image"
                           alt={Info.bookImage}
                           onClick={() => {this.clickImage(Info)}}
@@ -182,27 +185,27 @@ class Home extends Component {
             </div>
             <div>
                   <Modal show={this.state.isClickImage}
-                              onClose={ () => { 
-                                    this.setState({isClickImage: !this.state.isClickImage}) 
-                              }}
+                         onClose={ () => { 
+                              this.setState({isClickImage: !this.state.isClickImage}) 
+                         }}
                   >
-                  {/* Modal 내용 - 회원이 작성한 책정보*/}
-                  <div>
-                        <label className="home-book-text-title">책 이름</label>
-                        <p className="home-book-text-content">{this.state.bookName}</p>
-                  </div>
-                  <div>
-                        <label className="home-book-text-title">저자</label>
-                        <p className="home-book-text-content">{this.state.author}</p>
-                  </div>
-                  <div>
-                        <label className="home-book-text-title">발행일</label>
-                        <p className="home-book-text-content">{this.state.pubDate}</p>
-                  </div>
-                  <div>
-                        <label className="home-book-text-title">메모</label>
-                        <p className="home-book-text-content">{this.state.memo}</p>
-                  </div>
+                        {/* Modal 내용 - 회원이 작성한 책정보*/}
+                        <div>
+                              <label className="home-book-text-title">책 이름</label>
+                              <p className="home-book-text-content">{this.state.bookName}</p>
+                        </div>
+                        <div>
+                              <label className="home-book-text-title">저자</label>
+                              <p className="home-book-text-content">{this.state.author}</p>
+                        </div>
+                        <div>
+                              <label className="home-book-text-title">발행일</label>
+                              <p className="home-book-text-content">{this.state.pubDate}</p>
+                        </div>
+                        <div>
+                              <label className="home-book-text-title">메모</label>
+                              <p className="home-book-text-content">{this.state.memo}</p>
+                        </div>
                   </Modal>
             </div>
          </div>

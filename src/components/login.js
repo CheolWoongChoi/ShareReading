@@ -9,9 +9,12 @@ class Login extends Component {
   componentDidMount(){
     axios.get('/api/sessionInfo')
         .then( (res) => {
-            if(res.data){
-                this.props.history.push('/home'); 
-            }
+          console.log('Login Session Info');
+          console.log(res.data);
+
+          if(res.data){
+              //this.props.history.push('/home'); 
+          }
         });
   } 
 

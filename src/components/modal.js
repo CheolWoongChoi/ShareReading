@@ -19,7 +19,7 @@ import PropTypes from 'prop-types';
    borderRadius: 5,
    maxWidth: 500,
    minHeight: 500,
-   margin: '0 auto',
+   margin: 'auto auto',
    padding: 30
  };
 

@@ -33,20 +33,22 @@ class MyPage extends Component {
       this.clickLogOut = this.clickLogOut.bind(this);
    }
 
-   componentWillMount(){
-        axios.get('/api/sessionInfo')
-            .then( (res) => {
-                if(res.data)
-                    this.setState({nickname: res.data.nickname});
-                else{
-                        window.alert('로그인이 필요합니다!');
-                        this.props.history.push('/');
-                }
-        });
-   }
-
    componentDidMount(){
-       this.props.fetchBooks();
+        axios.get('/api/sessionInfo')
+                .then( (res) => {
+
+                    console.log('MyPage Session Info');
+                    console.log(res.data);
+
+                    if(res.data)
+                        this.setState({nickname: res.data.nickname});
+                    // else{
+                    //         window.alert('로그인이 필요합니다!');
+                    //         this.props.history.push('/');
+                    // }
+        });
+
+        this.props.fetchBooks();
    }
 
    clickLogOut(){
@@ -161,8 +163,9 @@ class MyPage extends Component {
                 >삭제하기</button>
             </div>
             <div>
-                <div>
-                    <img src={`/uploads/${book.nickname}/${book.bookImage}`} 
+                <div className="mypage-book-image-frame">
+                    {/* <img src={`/uploads/${book.nickname}/${book.bookImage}`} */}
+                    <img src={require(`../../server/uploads/${book.nickname}/${book.bookImage}`)} 
                          className="mypage-book-image" 
                          alt="welcome" 
                     />
@@ -311,7 +314,7 @@ class MyPage extends Component {
                </span>
                <span className="mypage-top-right">
                   <Link to="/home"
-                        className="mypage-btn btn btn-primary"
+                        className="mypage-btn btn btn-primary mypage-home-btn"
                    >
                      홈 화면으로 돌아가기
                    </Link>
