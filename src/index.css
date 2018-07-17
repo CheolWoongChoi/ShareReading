@@ -280,6 +280,11 @@
 /* Home Page - Mobile */
 
 @media(max-width:420px){
+
+    body{
+        padding-right: 0 !important;
+    }
+
     .home-member{
         padding-top: 2rem;
         text-align: center;
@@ -313,12 +318,12 @@
         font-size: 40px;
     }
 
-    .modalContent{
+    /* .modalContent{
         margin: 0 auto !important;
-    }
+    } */
 }
 
-@media(max-height:600px){
+/* @media(max-height:600px){
     a + .home-member-btn{
         width: 85% !important; 
     }
@@ -326,7 +331,7 @@
     .home-book-nickname-post{
         font-size: 1.2rem;
     }
-}
+} */
 
 
 /* Mypage Page */
@@ -396,6 +401,10 @@
 
 @media(max-width: 420px){
 
+    body{
+        padding-right: 0 !important;
+    }
+
     .mypage-top{
         padding: 0
     }
@@ -445,9 +454,9 @@
         font-size: 2.5rem;
     }
 
-    .modalContent{
+    /* .modalContent{
         margin: 0 auto !important;
-    }
+    } */
 }
 
 /* iPhone 5/SE

@@ -231,13 +231,26 @@ class MyPage extends Component {
               <div className="mypage-add-text">
                   <label>발행일</label>
                   <div>
-                        <input name="pubDate" className="form-control" type="text" />
+                        <input 
+                            name="pubDate" 
+                            className="form-control" 
+                            type="text" 
+                            onFocus={() => document.querySelector('.modalContent').style.marginTop = '-40%'} 
+                            onBlur={() => document.querySelector('.modalContent').style.marginTop = '0'}
+                        />
                   </div>
               </div>
               <div className="mypage-add-text">
                   <label>MEMO</label>
                   <div>
-                        <textarea name="memo" className="form-control" type="text" rows="3"/>
+                        <textarea 
+                            name="memo" 
+                            className="form-control" 
+                            type="text" 
+                            rows="3"
+                            onFocus={() => document.querySelector('.modalContent').style.marginTop = '-60%'} 
+                            onBlur={() => document.querySelector('.modalContent').style.marginTop = '0'}
+                        />
                   </div>
               </div>
               <div className="mypage-add-footer text-center">
@@ -287,7 +300,9 @@ class MyPage extends Component {
                                className="form-control" 
                                type="text" 
                                value={this.state.pubDate}
-                               onChange={(e) => this.setState({pubDate: e.target.value})} 
+                               onChange={(e) => this.setState({pubDate: e.target.value})}
+                               onFocus={() => document.querySelector('.modalContent').style.marginTop = '-40%'} 
+                               onBlur={() => document.querySelector('.modalContent').style.marginTop = '0'}
                         />
                     </div>
               </div>
@@ -299,7 +314,9 @@ class MyPage extends Component {
                                 type="text"
                                 rows="3" 
                                 value={this.state.memo}
-                                onChange={(e) => this.setState({memo: e.target.value})} 
+                                onChange={(e) => this.setState({memo: e.target.value})}
+                                onFocus={() => document.querySelector('.modalContent').style.marginTop = '-60%'} 
+                                onBlur={() => document.querySelector('.modalContent').style.marginTop = '0'} 
                             />
                     </div>
               </div>
