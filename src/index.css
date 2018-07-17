@@ -457,6 +457,14 @@
     /* .modalContent{
         margin: 0 auto !important;
     } */
+
+    .mypage-modal-pubdate{
+        margin-top: -50% !important;
+    }
+
+    .mypage-modal-memo{
+        margin-top: -70% !important;
+    }
 }
 
 /* iPhone 5/SE

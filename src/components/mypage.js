@@ -235,8 +235,8 @@ class MyPage extends Component {
                             name="pubDate" 
                             className="form-control" 
                             type="text" 
-                            onFocus={() => document.querySelector('.modalContent').style.marginTop = '-40%'} 
-                            onBlur={() => document.querySelector('.modalContent').style.marginTop = '0'}
+                            onFocus={() => document.querySelector('.modalContent').classList.add('mypage-modal-pubdate')} 
+                            onBlur={() => document.querySelector('.modalContent').classList.remove('mypage-modal-pubdate')}
                         />
                   </div>
               </div>
@@ -248,8 +248,8 @@ class MyPage extends Component {
                             className="form-control" 
                             type="text" 
                             rows="3"
-                            onFocus={() => document.querySelector('.modalContent').style.marginTop = '-60%'} 
-                            onBlur={() => document.querySelector('.modalContent').style.marginTop = '0'}
+                            onFocus={() => document.querySelector('.modalContent').classList.add('mypage-modal-memo')} 
+                            onBlur={() => document.querySelector('.modalContent').classList.remove('mypage-modal-memo')}
                         />
                   </div>
               </div>
@@ -301,8 +301,8 @@ class MyPage extends Component {
                                type="text" 
                                value={this.state.pubDate}
                                onChange={(e) => this.setState({pubDate: e.target.value})}
-                               onFocus={() => document.querySelector('.modalContent').style.marginTop = '-40%'} 
-                               onBlur={() => document.querySelector('.modalContent').style.marginTop = '0'}
+                               onFocus={() => document.querySelector('.modalContent').classList.add('mypage-modal-pubdate')} 
+                               onBlur={() => document.querySelector('.modalContent').classList.remove('mypage-modal-pubdate')}
                         />
                     </div>
               </div>
@@ -315,8 +315,8 @@ class MyPage extends Component {
                                 rows="3" 
                                 value={this.state.memo}
                                 onChange={(e) => this.setState({memo: e.target.value})}
-                                onFocus={() => document.querySelector('.modalContent').style.marginTop = '-60%'} 
-                                onBlur={() => document.querySelector('.modalContent').style.marginTop = '0'} 
+                                onFocus={() => document.querySelector('.modalContent').classList.add('mypage-modal-memo')} 
+                                onBlur={() => document.querySelector('.modalContent').classList.remove('mypage-modal-memo')} 
                             />
                     </div>
               </div>
