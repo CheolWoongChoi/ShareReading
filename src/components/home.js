@@ -52,8 +52,8 @@ class Home extends Component {
    componentDidMount(){
       axios.get('/api/sessionInfo')
          .then( (res) => {
-            console.log('Home Session Info');
-            console.log(res.data);
+            // console.log('Home Session Info');
+            // console.log(res.data);
 
             if(res.data){
                this.setState({nickname: res.data.nickname});

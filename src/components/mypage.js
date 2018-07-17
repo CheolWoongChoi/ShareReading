@@ -37,8 +37,8 @@ class MyPage extends Component {
         axios.get('/api/sessionInfo')
                 .then( (res) => {
 
-                    console.log('MyPage Session Info');
-                    console.log(res.data);
+                    // console.log('MyPage Session Info');
+                    // console.log(res.data);
 
                     if(res.data)
                         this.setState({nickname: res.data.nickname});

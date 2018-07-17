@@ -9,11 +9,11 @@ class Login extends Component {
   componentDidMount(){
     axios.get('/api/sessionInfo')
         .then( (res) => {
-          console.log('Login Session Info');
-          console.log(res.data);
+          // console.log('Login Session Info');
+          // console.log(res.data);
 
           if(res.data){
-              //this.props.history.push('/home'); 
+              this.props.history.push('/home'); 
           }
         });
   } 

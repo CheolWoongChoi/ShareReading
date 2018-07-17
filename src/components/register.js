@@ -33,7 +33,7 @@ class Register extends Component {
       axios.post('/api/auth/register', values)
          .then( (res) => {
 
-            console.log(res.data);
+            // console.log(res.data);
 
             if(res.data ==='DUPL-ID'){
                 this.props.alert.show('중복된 ID입니다!');
