@@ -62,7 +62,7 @@
 }
 
 
-/* Login Page - iPhone5/SE */
+/* Login Page - iPhone5/SE
 
 @media(max-height:600px){
     
@@ -98,7 +98,7 @@
     .login-register{
         text-align: center;
     }
-}
+} */
 
 
 /* Register Page */
@@ -180,7 +180,7 @@
     }
 }
 
-@media(max-height:600px){
+/* @media(max-height:600px){
 
     .register-submit{
         margin-top: 2rem;
@@ -197,7 +197,7 @@
     .register-error{
         margin-left: 9rem;
     }
-}
+} */
 
 
 /* Home Page */
@@ -309,13 +309,12 @@
         font-size: 2.3rem;
     }
 
-    .home-book-image{
-        width: 70%;
-        height: 70%;
-    }
-
     .slick-prev:before, .slick-next:before{
         font-size: 40px;
+    }
+
+    .modalContent{
+        margin: 0 auto !important;
     }
 }
 
@@ -366,6 +365,10 @@
    margin-top: 30px;
 }
 
+.mypage-add-image{
+    max-width: 300px;
+}
+
 .mypage-add-text{
    margin-top: 20px;
    max-width: 300px;
@@ -401,9 +404,13 @@
         float: none;
     }
 
+    .mypage-add-text{
+        margin-top: 1rem;
+    }
+
     span > .mypage-btn{
         display: block;
-        margin: 1.5rem auto;
+        margin: 2rem auto;
         width: 60%;
     }
 
@@ -437,12 +444,16 @@
     .mypage-book-text > label{
         font-size: 2.5rem;
     }
+
+    .modalContent{
+        margin: 0 auto !important;
+    }
 }
 
-/* iPhone 5/SE */
+/* iPhone 5/SE
 
 @media(max-height: 600px){
     span > a {
         width: 80% !important;
     }
-}
+} */

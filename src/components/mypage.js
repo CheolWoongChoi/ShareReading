@@ -42,10 +42,10 @@ class MyPage extends Component {
 
                     if(res.data)
                         this.setState({nickname: res.data.nickname});
-                    // else{
-                    //         window.alert('로그인이 필요합니다!');
-                    //         this.props.history.push('/');
-                    // }
+                    else{
+                            window.alert('로그인이 필요합니다!');
+                            this.props.history.push('/');
+                    }
         });
 
         this.props.fetchBooks();
@@ -119,6 +119,9 @@ class MyPage extends Component {
       this.setState({
         isAdd: !this.state.isAdd
       });
+
+      document.querySelector('body').style.overflow = 'auto';
+      document.querySelector('body').style.paddingRight = '0';
    }
  
    bookModifyModal(book){
@@ -130,6 +133,9 @@ class MyPage extends Component {
         pubDate: book.pubDate,
         memo: book.memo
       });
+
+      document.querySelector('body').style.overflow = 'auto';
+      document.querySelector('body').style.paddingRight = '0';
    }
 
    bookDelete(bookImage){
@@ -164,8 +170,8 @@ class MyPage extends Component {
             </div>
             <div>
                 <div className="mypage-book-image-frame">
-                    <img src={`/uploads/${book.nickname}/${book.bookImage}`}
-                    /* <img src={require(`../../server/uploads/${book.nickname}/${book.bookImage}`)}*/
+                    {/* <img src={`/uploads/${book.nickname}/${book.bookImage}`} */}
+                    <img src={require(`../../server/uploads/${book.nickname}/${book.bookImage}`)}
                          className="mypage-book-image" 
                          alt="welcome" 
                     />
@@ -206,7 +212,7 @@ class MyPage extends Component {
                 <label className="mypage-add-text">책 이미지</label>
                 <input type="file"
                         name="bookImage" 
-                        className="form-control mypage-add-text" 
+                        className="form-control mypage-add-image" 
                         accept=".jpg, .jpeg, .png"
                 />
               </div>
@@ -330,7 +336,8 @@ class MyPage extends Component {
             {/* 책 추가 */}
             <div>
                 <Modal show={this.state.isAdd}
-                    onClose={this.bookAddModal}>
+                       onClose={this.bookAddModal}
+                >
                     {this.renderBookAdd()}
                 </Modal>
             </div>
@@ -338,7 +345,8 @@ class MyPage extends Component {
              {/* 책 수정 */}
              <div>
                 <Modal show={this.state.isModify}
-                    onClose={this.bookModifyModal}>
+                       onClose={this.bookModifyModal}
+                >
                     {this.renderBookModify()}
                 </Modal>
               </div>

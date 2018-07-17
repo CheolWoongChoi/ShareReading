@@ -58,10 +58,10 @@ class Home extends Component {
             if(res.data){
                this.setState({nickname: res.data.nickname});
             }
-            // else{
-            //    window.alert('로그인이 필요합니다!');
-            //    this.props.history.push('/');
-            // }
+            else{
+               window.alert('로그인이 필요합니다!');
+               this.props.history.push('/');
+            }
       });
 
       if(!this.props.allbooks.length)
@@ -92,8 +92,8 @@ class Home extends Component {
             return userBookInfo.map( (Info) => {
                   return (
                   <div key={Info.bookImage} className="home-book-image-frame"> 
-                     <img src={`/uploads/${nickname}/${Info.bookImage}`}
-                     /* <img src={require(`../../server/uploads/${nickname}/${Info.bookImage}`)}*/
+                     {/* <img src={`/uploads/${nickname}/${Info.bookImage}`} */}
+                     <img src={require(`../../server/uploads/${nickname}/${Info.bookImage}`)}
                           className="home-book-image"
                           alt={Info.bookImage}
                           onClick={() => {this.clickImage(Info)}}
@@ -186,7 +186,9 @@ class Home extends Component {
             <div>
                   <Modal show={this.state.isClickImage}
                          onClose={ () => { 
-                              this.setState({isClickImage: !this.state.isClickImage}) 
+                              this.setState({isClickImage: !this.state.isClickImage});
+                              document.querySelector('body').style.overflow = 'auto';
+                              document.querySelector('body').style.paddingRight = '0'; 
                          }}
                   >
                         {/* Modal 내용 - 회원이 작성한 책정보*/}
