@@ -7,12 +7,18 @@ import axios from 'axios';
 class Login extends Component {
 
   componentDidMount(){
+
+    if(navigator.userAgent.toLowerCase().indexOf('trident')>-1){
+      window.alert('인터넷 익스플로러에서 작동하지 않습니다. <구글 CHROME>을 사용해주세요!');
+    }
+
     axios.get('/api/sessionInfo')
         .then( (res) => {
           // console.log('Login Session Info');
           // console.log(res.data);
 
           if(res.data){
+              window.alert('로그인 상태이기 때문에, Home 화면으로 이동합니다.')
               this.props.history.push('/home'); 
           }
         });

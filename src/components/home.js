@@ -71,6 +71,7 @@ class Home extends Component {
    clickLogOut(){
       axios.get('/api/auth/logout')
             .then( (res) => {
+            //    console.log(res.data);
                this.props.history.push('/');
             });
    }
@@ -93,7 +94,7 @@ class Home extends Component {
                   return (
                   <div key={Info.bookImage} className="home-book-image-frame"> 
                      <img src={`/uploads/${nickname}/${Info.bookImage}`}
-                     //<img src={require(`../../server/uploads/${nickname}/${Info.bookImage}`)}
+                  //    <img src={require(`../../server/uploads/${nickname}/${Info.bookImage}`)}
                           className="home-book-image"
                           alt={Info.bookImage}
                           onClick={() => {this.clickImage(Info)}}

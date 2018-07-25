@@ -42,6 +42,7 @@ class Register extends Component {
                 this.props.alert.show('중복된 닉네임입니다!');
             } 
             else{
+                window.alert('회원가입 되었습니다.');
                 this.props.history.push('/');
             }
 

@@ -17,6 +17,7 @@ const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 class App extends Component {
   render() {
     return (
+      <div>
       <Provider store={createStoreWithMiddleware(reducers)}>
         <BrowserRouter>
           <Switch>
@@ -28,6 +29,7 @@ class App extends Component {
           </Switch>
         </BrowserRouter>
       </Provider>
+      </div>
     );
   }
 }
