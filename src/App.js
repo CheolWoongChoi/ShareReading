@@ -10,7 +10,6 @@ import Login from './components/login';
 import Register from './components/register';
 import Home from './components/home';
 import MyPage from './components/mypage';
-import Test from './components/test';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -24,7 +23,6 @@ class App extends Component {
             <Route path='/register' component={Register} />
             <Route path='/home' component={Home} />
             <Route path='/mypage' component={MyPage} />
-            <Route path='/test' component={Test} />
             <Route path='/' component={Login} />
           </Switch>
         </BrowserRouter>
