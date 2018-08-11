@@ -1,5 +1,5 @@
 
-/* Login Page */
+/* 로그인 화면 */
 
 .login-title{
    margin: 2rem auto;
@@ -43,9 +43,9 @@
 }
 
 
-/* Login Page - Mobile */
+/* 로그인 (모바일) 화면 */
 
-/* Gereral Android & iPhone*/
+/* 일반적인 안드로이드 & 아이폰 */
 @media(max-width:420px){
 
     .login-title{
@@ -62,7 +62,7 @@
 }
 
 
-/* Login Page - iPhone5/SE
+/* 아이폰5/SE
 
 @media(max-height:600px){
     
@@ -101,7 +101,7 @@
 } */
 
 
-/* Register Page */
+/* 회원가입 화면 */
 
 .register-title{
    padding: 3rem;
@@ -137,7 +137,7 @@
 }
 
 
-/* Register Page - Mobile */
+/* 회원가입 (모바일) 화면 */
 
 @media(max-width:420px){
 
@@ -180,7 +180,9 @@
     }
 }
 
-/* @media(max-height:600px){
+/* 아이폰5/SE
+
+    @media(max-height:600px){
 
     .register-submit{
         margin-top: 2rem;
@@ -200,7 +202,7 @@
 } */
 
 
-/* Home Page */
+/* 홈(메인) 화면 */
 
 .home-nickname{
    font-weight: bold;
@@ -277,7 +279,7 @@
 }
 
 
-/* Home Page - Mobile */
+/* 홈(메인) (모바일) 화면 */
 
 @media(max-width:420px){
 
@@ -318,23 +320,10 @@
         font-size: 40px;
     }
 
-    /* .modalContent{
-        margin: 0 auto !important;
-    } */
 }
 
-/* @media(max-height:600px){
-    a + .home-member-btn{
-        width: 85% !important; 
-    }
 
-    .home-book-nickname-post{
-        font-size: 1.2rem;
-    }
-} */
-
-
-/* Mypage Page */
+/* 마이페이지 화면 */
 
 .mypage-top{
    padding: 15px;
@@ -397,7 +386,7 @@
 }
 
 
-/* MyPage - Mobile */
+/* 마이페이지 (모바일) 화면 */
 
 @media(max-width: 420px){
 
@@ -454,10 +443,6 @@
         font-size: 2.5rem;
     }
 
-    /* .modalContent{
-        margin: 0 auto !important;
-    } */
-
     .mypage-modal-pubdate{
         margin-top: -50% !important;
     }
@@ -467,7 +452,7 @@
     }
 }
 
-/* iPhone 5/SE
+/* 아이폰5/SE
 
 @media(max-height: 600px){
     span > a {
