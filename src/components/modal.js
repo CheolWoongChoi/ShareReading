@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
- // The gray background
+ // 바깥쪽 회색 배경
  const backdropStyle = {
     position: 'fixed',
     top: 0,
@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
     padding: 50
  };
 
- // The modal "window"
+ // 안쪽 화면에 모달 CSS
  const modalStyle = {
     backgroundColor: '#fff',
     borderRadius: 5,
@@ -26,11 +26,13 @@ import PropTypes from 'prop-types';
 
 class Modal extends Component {
   
+   //모달 화면을 출력
    render() {
     if(!this.props.show){
        return null;
     }
 
+    //화면 스크롤 고정
     document.querySelector('body').style.overflow = 'hidden';
     document.querySelector('body').style.paddingRight = '17px';
 
@@ -42,6 +44,8 @@ class Modal extends Component {
                 창 닫기
               </button>
             </div>
+
+            {/* 모달 종류(책 추가/책 수정)에 따라 내용을 다르게 보여줌 */}
             {this.props.children}
          </div>
        </div>
