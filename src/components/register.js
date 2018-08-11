@@ -6,8 +6,8 @@ import axios from 'axios';
 
 class Register extends Component {
 
+  //텍스트 필드 UI
   renderField(field){
-
       const { meta : {touched, error} } = field;
       const hasError = `${touched && error ? 'has-error' : ''}` 
 
@@ -29,12 +29,10 @@ class Register extends Component {
       )
   }
   
+  //회원가입에 필요한 Form 정보를 서버로 전송, 서버에서 중복 여부 검사
   onSubmit(values){
       axios.post('/api/auth/register', values)
          .then( (res) => {
-
-            // console.log(res.data);
-
             if(res.data ==='DUPL-ID'){
                 this.props.alert.show('중복된 ID입니다!');
             } 
@@ -45,13 +43,13 @@ class Register extends Component {
                 window.alert('회원가입 되었습니다.');
                 this.props.history.push('/');
             }
-
          });
   }
 
-  render(){
 
-   const { handleSubmit } = this.props;
+  //전체적인 '회원 가입' UI 렌더링
+  render(){
+    const { handleSubmit } = this.props;
 
     return( 
       <div>
@@ -106,6 +104,7 @@ class Register extends Component {
   }
 }
 
+//회원 가입 입력 정보 검사(validation)
 function validate(values){
   
    const errors = {};
@@ -137,6 +136,7 @@ function validate(values){
    return errors;
  }
 
+ //Redux-Form을 연결한 Register 컴포넌트를 내보냄
 export default reduxForm({
   validate,
   form: 'register'

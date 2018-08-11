@@ -14,11 +14,12 @@ class MyPage extends Component {
 
       super(props);
       this.state = {
-        nickname: '',
+        nickname: '',           //사용자의 닉네임
 
-        isAdd: false,
-        isModify: false,
+        isAdd: false,           //책 추가 모달(Modal) On/Off 상태
+        isModify: false,        //책 수정 모달 On/Off 상태
 
+        //책 정보
         bookName: '',
         author: '',
         pubDate: '',
@@ -34,12 +35,10 @@ class MyPage extends Component {
 
    }
 
+   //세션 유무를 검사하여 로그인 확인
    componentDidMount(){
         axios.get('/api/sessionInfo')
                 .then( (res) => {
-
-                    // console.log('MyPage Session Info');
-                    // console.log(res.data);
 
                     if(res.data)
                         this.setState({nickname: res.data.nickname});
@@ -52,6 +51,7 @@ class MyPage extends Component {
         this.props.fetchBooks();
    }
 
+   //로그아웃 처리
    clickLogOut(){
       axios.get('/api/auth/logout')
         .then( (res) => {
@@ -59,8 +59,8 @@ class MyPage extends Component {
         });
    }
 
+   //책 추가 모달에서 Form 정보를 서버로 전송하여 책 정보를 추가
    addSubmit(event){
-      //console.log(event.target);
       event.preventDefault();
       
       if(window.confirm('추가하시겠습니까?')){
@@ -71,7 +71,7 @@ class MyPage extends Component {
         /* 브라우저별 FormData 처리 */
         //IE
         if(navigator.userAgent.toLowerCase().indexOf('trident')>-1){
-            window.alert('IE!');
+            window.alert('인터넷 익스플로러에서 사용 불가능 합니다! 구글 크롬(Chrome)을 이용해주세요!');
         }
         //Chrome
         else {
@@ -95,8 +95,8 @@ class MyPage extends Component {
       }
    }
 
+   //책 수정 모달에서 Form 정보를 서버로 전송하여 책 정보를 수정
    modifySubmit(event){
-    //console.log(event.target);
      event.preventDefault();
 
      if(window.confirm('수정하시겠습니까?')){
@@ -106,7 +106,7 @@ class MyPage extends Component {
         /* 브라우저별 FormData 처리 */
         //IE
         if(navigator.userAgent.toLowerCase().indexOf('trident')>-1){
-            window.alert('IE!');
+            window.alert('인터넷 익스플로러에서 사용 불가능 합니다! 구글 크롬(Chrome)을 이용해주세요!');
         }
         //Chrome
         else {
@@ -130,6 +130,7 @@ class MyPage extends Component {
      }
    }
 
+   //책 추가 모달을 화면에 띄우기 위한 함수 - state값을 바꿔 주고, 화면 스크롤을 고정시킴
    bookAddModal(){
       this.setState({
         isAdd: !this.state.isAdd
@@ -139,6 +140,7 @@ class MyPage extends Component {
       document.querySelector('body').style.paddingRight = '0';
    }
  
+   //책 수정 모달을 화면에 띄우기 위한 함수 - state값을 바꿔 주고, 화면 스크롤을 고정시킴
    bookModifyModal(book){
       this.setState({
         isModify: !this.state.isModify,
@@ -153,6 +155,7 @@ class MyPage extends Component {
       document.querySelector('body').style.paddingRight = '0';
    }
 
+   //책 정보를 삭제 - 서버에 책 정보 삭제를 요청
    bookDelete(bookImage){
        if(window.confirm('삭제하시겠습니까?')){
            axios.delete(`/api/mypage/delete?bookImage=${bookImage}`)
@@ -167,8 +170,8 @@ class MyPage extends Component {
        }
    }
 
+   //책 정보 UI
    renderBook(book){
-      
       return(
         <div key={book.bookImage} className="mypage-book"> 
             <div className="mypage-book-top text-right">
@@ -181,8 +184,8 @@ class MyPage extends Component {
             </div>
             <div>
                 <div className="mypage-book-image-frame">
-                    <img src={`/uploads/${book.nickname}/${book.bookImage}`}
-                    // <img src={require(`../../server/uploads/${book.nickname}/${book.bookImage}`)}
+                    {/* <img src={`/uploads/${book.nickname}/${book.bookImage}`} */}
+                    <img src={require(`../../server/uploads/${book.nickname}/${book.bookImage}`)}
                          className="mypage-book-image" 
                          alt="welcome" 
                     />
@@ -216,6 +219,7 @@ class MyPage extends Component {
       )
    }
 
+   //책 추가 모달 UI
    renderBookAdd(){
       return(
           <form id="addForm" onSubmit={this.addSubmit} encType="multipart/form-data">
@@ -271,6 +275,7 @@ class MyPage extends Component {
       );
    }
 
+   //책 수정 모달 UI
    renderBookModify(){
       return(
           <form id="modifyForm" onSubmit={this.modifySubmit} encType="multipart/form-data">
@@ -338,6 +343,7 @@ class MyPage extends Component {
       );
   }
 
+   //전체적인 '마이페이지' 화면 UI 렌더링
    render(){
       return(
          <div className="mypage-top">
@@ -383,8 +389,10 @@ class MyPage extends Component {
    }
 }
 
+//Redux를 사용하여 사용자의 책 정보들을 books로 가져옴
 function mapStateToProps(state) {
     return { books: state.books }
 }
 
+//Redux를 연결한 MyPage 컴포넌트를 내보냄
 export default connect(mapStateToProps, { fetchBooks })(MyPage);
