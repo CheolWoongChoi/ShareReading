@@ -2,8 +2,11 @@
 const express = require('express');
 const fs = require('fs');
 const multer = require('multer');
+
+//사용자들이 업로드한 이미지를 저장
 const _storage = multer.diskStorage({
-   
+  
+   //서버의 uploads 디렉터리에 해당 사용자(닉네임)의 디렉터리를 만들고 업로드한 이미지 저장
    destination: (req, file, callback) => {
 
       let path = `./uploads/${req.session.passport.user.nickname}`;
@@ -14,6 +17,8 @@ const _storage = multer.diskStorage({
       callback(null, path);
 
    },
+
+   //업로드한 이미지 시간을 이미지 이름에 붙여서, 이미지 이름이 중복되지 않도록 함
    filename: (req, file, callback) => {
 
       let dt = new Date();
@@ -34,6 +39,8 @@ const upload = multer({ storage: _storage });
 const route = express.Router();
 const conn = require('../config/db')();
 
+
+//특정 사용자의 책 정보를 데이터베이스로부터 가져옴
 route.get('/books', (req, res) => {
 
    let nickname = req.session.passport.user.nickname;
@@ -50,6 +57,7 @@ route.get('/books', (req, res) => {
    });
 });
 
+//데이터베이스에 책 정보를 추가
 route.post('/add', upload.single('bookImage'), (req, res) => {
    
    let sql = `INSERT INTO books (nickname, bookName, bookImage, author, pubDate, memo) VALUES ?`;
@@ -73,6 +81,7 @@ route.post('/add', upload.single('bookImage'), (req, res) => {
    });
 });
 
+//데이터베이스에 저장된 책 정보를 수정
 route.post('/modify', upload.array(), (req, res) => {
 
    sql = `UPDATE books SET bookName=?, author=?, pubDate=?, memo=? WHERE nickname=? AND no=?`;
@@ -97,6 +106,7 @@ route.post('/modify', upload.array(), (req, res) => {
       });
 });
 
+//데이터베이스에서 책 정보를 삭제
 route.delete('/delete', (req, res) => {
    
    let nickname = req.session.passport.user.nickname;
@@ -109,13 +119,11 @@ route.delete('/delete', (req, res) => {
          res.send('Internal Server Error : Database Upload Error');
       }
       else{
-         console.log('db delete ok');
-
          let file = `./uploads/${req.session.passport.user.nickname}/${bookImage}`;
-
+         
+         //서버에 저장된 이미지 파일을 제거
          if(fs.existsSync(file)){
             fs.unlinkSync(file);
-            console.log('file delete ok');
          }
          else{
             console.log('File already deleted');
