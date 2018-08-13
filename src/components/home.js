@@ -103,8 +103,7 @@ class Home extends Component{
             return userBookInfo.map( (Info) => {
                   return (
                         <div key={Info.bookImage} className="home-book-image-frame"> 
-                        {/* <img src={`/uploads/${nickname}/${Info.bookImage}`} */}
-                        <img src={require(`../../server/uploads/${nickname}/${Info.bookImage}`)}
+                        <img src={`/uploads/${nickname}/${Info.bookImage}`}
                               className="home-book-image"
                               alt={Info.bookImage}
 

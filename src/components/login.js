@@ -31,18 +31,18 @@ class Login extends Component {
     const hasError = `${touched && error ? 'has-error' : ''}`
     
     return(
-      <div className={hasError}>
-        <input 
-          className={`form-control input-lg login-input ${hasError}`} 
-          type={field.type} 
-          placeholder={field.label}
-          {...field.input}
-        />
+        <div className={hasError}>
+          <input 
+            className={`form-control input-lg login-input ${hasError}`} 
+            type={field.type} 
+            placeholder={field.label}
+            {...field.input}
+          />
 
-        <div className="login-error">
-          {touched ? error : ''}
+          <div className="login-error">
+            {touched ? error : ''}
+          </div>
         </div>
-      </div>
     )
   }
   

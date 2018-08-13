@@ -184,8 +184,7 @@ class MyPage extends Component {
             </div>
             <div>
                 <div className="mypage-book-image-frame">
-                    {/* <img src={`/uploads/${book.nickname}/${book.bookImage}`} */}
-                    <img src={require(`../../server/uploads/${book.nickname}/${book.bookImage}`)}
+                    <img src={`/uploads/${book.nickname}/${book.bookImage}`}
                          className="mypage-book-image" 
                          alt="welcome" 
                     />
