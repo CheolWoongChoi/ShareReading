@@ -218,7 +218,7 @@ class Home extends Component{
 
                               //모달이 화면에 출력되면 화면이 이동되지 않도록 스크롤 고정
                               document.querySelector('body').style.overflow = 'auto';
-                              document.querySelector('body').style.paddingRight = '0'; 
+                              //document.querySelector('body').style.paddingRight = '0'; 
                          }}
                   >
                         {/* Modal 내용 - 사용자가 작성한 책 정보*/}

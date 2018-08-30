@@ -34,7 +34,7 @@ class Modal extends Component {
 
     //화면 스크롤 고정
     document.querySelector('body').style.overflow = 'hidden';
-    document.querySelector('body').style.paddingRight = '17px';
+    //document.querySelector('body').style.paddingRight = '17px';
 
     return (
       <div className="backdrop" style={backdropStyle}>

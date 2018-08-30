@@ -137,7 +137,7 @@ class MyPage extends Component {
       });
 
       document.querySelector('body').style.overflow = 'auto';
-      document.querySelector('body').style.paddingRight = '0';
+      //document.querySelector('body').style.paddingRight = '0';
    }
  
    //책 수정 모달을 화면에 띄우기 위한 함수 - state값을 바꿔 주고, 화면 스크롤을 고정시킴
@@ -152,7 +152,7 @@ class MyPage extends Component {
       });
 
       document.querySelector('body').style.overflow = 'auto';
-      document.querySelector('body').style.paddingRight = '0';
+      //document.querySelector('body').style.paddingRight = '0';
    }
 
    //책 정보를 삭제 - 서버에 책 정보 삭제를 요청
